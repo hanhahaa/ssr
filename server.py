@@ -1,19 +1,5 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
-#
-# Copyright 2015 breakwall
-#
-# Licensed under the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License. You may obtain
-# a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations
-# under the License.
+
 
 import logging
 import os
@@ -30,7 +16,7 @@ if __name__ == "__main__":
 
 import db_transfer
 import web_transfer
-import speedtest_thread
+#import speedtest_thread
 import auto_thread
 import auto_block
 from shadowsocks import shell
@@ -62,8 +48,8 @@ def main():
         threadMain = MainThread(db_transfer.DbTransfer)
     threadMain.start()
 
-    threadSpeedtest = MainThread(speedtest_thread.Speedtest)
-    threadSpeedtest.start()
+    #threadSpeedtest = MainThread(speedtest_thread.Speedtest)
+    #threadSpeedtest.start()
 
     threadAutoexec = MainThread(auto_thread.AutoExec)
     threadAutoexec.start()
@@ -79,8 +65,8 @@ def main():
 
         traceback.print_exc()
         threadMain.stop()
-        if threadSpeedtest.is_alive():
-            threadSpeedtest.stop()
+        #if threadSpeedtest.is_alive():
+            #threadSpeedtest.stop()
         if threadAutoexec.is_alive():
             threadAutoexec.stop()
         if threadAutoblock.is_alive():
