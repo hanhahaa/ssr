@@ -1,20 +1,20 @@
 # Config
-NODE_ID = 0
+NODE_ID = $1
 
 # hour,set 0 to disable
-SPEEDTEST = 6
+#SPEEDTEST = 0
 CLOUDSAFE = 1
 ANTISSATTACK = 0
 AUTOEXEC = 0
 
-MU_SUFFIX = "zhaoj.in"
-MU_REGEX = "%5m%id.%suffix"
+MU_SUFFIX = "ajax.microsoft.com"
+MU_REGEX = "%suffix"
 
 SERVER_PUB_ADDR = "127.0.0.1"  # mujson_mgr need this to generate ssr link
 API_INTERFACE = "modwebapi"  # glzjinmod, modwebapi
 
-WEBAPI_URL = "https://zhaoj.in"
-WEBAPI_TOKEN = "glzjin"
+WEBAPI_URL = "https://soulout.club"
+WEBAPI_TOKEN = "souloutclub"
 
 # mudb
 MUDB_FILE = "mudb.json"
