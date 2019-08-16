@@ -9,12 +9,11 @@ nfip=$hkip
 
 echo "domain-needed
 #不使用本地hosts
-no-hosts
+#no-hosts
 #指定上游DNS
 all-servers
 server=1.1.1.1
 server=8.8.8.8
-
 query-port=54
 #加载本地hosts
 #addn-hosts=/etc/hosts
