@@ -34,9 +34,8 @@ address=/nflximg.net/$nfip
 address=/nflxso.net/$nfip
 address=/nflxvideo.net/$nfip
 ###香港TVB#############################
-address=/mytvsuper.com/$nfip
-address=/tvb.com/$nfip
-address=/ads.tvb.com/127.0.0.1
+address=/mytvsuper.com/$hkip
+address=/tvb.com/$hkip
 ###台湾动画疯##########################
 address=/gamer.com.tw/$twip
 address=/bahamut.com.tw/$twip
