@@ -1,6 +1,6 @@
 # Config
 NODE_ID = 0
-
+##前两行不要动，备注往后加
 # hour,set 0 to disable
 #SPEEDTEST = 0
 CLOUDSAFE = 0
@@ -13,7 +13,7 @@ MU_REGEX = "%4m.%suffix"
 SERVER_PUB_ADDR = "127.0.0.1"  # mujson_mgr need this to generate ssr link
 API_INTERFACE = "modwebapi"  # glzjinmod, modwebapi
 
-WEBAPI_URL = "https://soulout.club"
+WEBAPI_URL = "https://api.soulout.club"
 WEBAPI_TOKEN = "souloutclub"
 
 # mudb
