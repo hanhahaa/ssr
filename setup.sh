@@ -12,7 +12,7 @@ pip install -r requirements.txt
 cp apiconfig.py userapiconfig.py
 cp config.json user-config.json
 #传入nodeid参数
-sed -i '2s/0/$1/' userapiconfig.py
+sed -i "2s/0/$1/" userapiconfig.py
 #添加服务
 cp -r /root/ssr/ssr.service /etc/systemd/system/
 systemctl enable ssr
