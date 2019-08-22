@@ -1,5 +1,5 @@
 # Config
-NODE_ID = $1
+NODE_ID = 0
 # hour,set 0 to disable
 #SPEEDTEST = 0
 CLOUDSAFE = 0
