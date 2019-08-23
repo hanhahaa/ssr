@@ -2,7 +2,7 @@
 NODE_ID = 0
 # hour,set 0 to disable
 #SPEEDTEST = 0
-CLOUDSAFE = 0
+CLOUDSAFE = 1
 ANTISSATTACK = 0
 AUTOEXEC = 0
 
@@ -10,7 +10,7 @@ MU_SUFFIX = "microsoft.com"
 MU_REGEX = "%4m.%suffix"
 
 SERVER_PUB_ADDR = "127.0.0.1"  # mujson_mgr need this to generate ssr link
-API_INTERFACE = "modwebapi"  # glzjinmod, modwebapi
+API_INTERFACE = "glzjinmod"  # glzjinmod, modwebapi
 
 WEBAPI_URL = "https://api.soulout.club"
 WEBAPI_TOKEN = "souloutclub"
