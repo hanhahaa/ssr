@@ -16,7 +16,7 @@ server=1.1.1.1
 server=8.8.8.8
 query-port=54
 #加载本地hosts
-#addn-hosts=/etc/hosts
+addn-hosts=/etc/hosts
 # 监听的IP地址
 listen-address=127.0.0.1
 
