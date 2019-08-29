@@ -1,7 +1,5 @@
 #!/bin/sh
 
-
-
 ##BBR以及内核优化
 echo "
 * soft nofile 51200
@@ -36,6 +34,7 @@ net.ipv4.tcp_wmem = 4096 65536 67108864
 net.ipv4.tcp_mtu_probing = 1
 ">>/etc/sysctl.conf
 sysctl -p
+###########
 apt update
 #安装环境
 apt install python-pip git libssl-dev python-dev libffi-dev software-properties-common vim -y
