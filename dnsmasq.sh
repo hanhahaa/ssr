@@ -2,16 +2,23 @@
 
 #获取当前的流媒体解锁IP
 twip=`ping -c1 hinet-gaoxiong.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
-hkip=`ping -c1 hk-hkt.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
+hkip=`ping -c1 hkt.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
 sgip=`ping -c1 sgp.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
 jpip=`ping -c1 jp.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
 nfip=$hkip
 
+#写入dnsmasq缓存
+touch_dnsmasq_tmp() {
+echo "old_twip='"$twip"'
+old_hkip='"$hkip"'
+old_sgip='"$sgip"'
+old_jpip='"$jpip"'">/tmp/dnsmasq_tmp
+}
 
 #定义刷新dnsmasq参数并重启的函数
-function flush_dnsmasq_conf() {
-echo "domain-needed
-
+flush_dnsmasq_conf() {
+echo "#验证域名
+domain-needed
 #定义上游DNS
 all-servers
 server=1.1.1.1
@@ -68,22 +75,22 @@ address=/nimg.jp/$jpip
 ">/etc/dnsmasq.conf
 systemctl restart dnsmasq
 }
-#写入临时文件，如果没有就创建
+
 if [ ! -f "/tmp/dnsmasq_tmp" ]; then 
-	echo "
-	old_twip=$twip
-	old_hkip=$hkip
-	old_sgip=$sgip
-	old_jpip=$jpip">/tmp/dnsmasq_tmp
-	flush_dnsmasq_conf
+	echo "无缓存，写入缓存并刷新配置"
+        touch_dnsmasq_tmp
+        flush_dnsmasq_conf
 else
-    . /tmp/dnsmasq_tmp
-	echo "$old_twip"
+	echo "存在缓存，检查是否有变化"
+        .  /tmp/dnsmasq_tmp
 	#对比IP变化，有变化就刷新重启dnsmasq
-	if ["$twip"="old_twip" & "$hkip"="$old_hkip" & "$spip"=&"old_sgip" & "$jpip"="old_jpip" ]; then
+	if [ $twip == "$old_twip" -a $hkip == "$old_hkip" -a $sgip == "$old_sgip" -a $jpip == "$old_jpip" ];then
+	    echo "无变化，退出脚本"
 	    exit
 	else 
+	    echo "IP有变动，刷新配置和缓存"
 	    flush_dnsmasq_conf
+            touch_dnsmasq_tmp
 	fi
 	        
 fi
