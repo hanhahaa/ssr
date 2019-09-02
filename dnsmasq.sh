@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #获取当前的流媒体解锁IP
 twip=`ping -c1 hinet-gaoxiong.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
