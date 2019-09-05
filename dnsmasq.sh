@@ -73,7 +73,7 @@ address=/brightcove.com/$jpip
 address=/nicovideo.jp/$jpip
 address=/nimg.jp/$jpip
 ">/etc/dnsmasq.conf
-systemctl restart dnsmasq
+systemctl restart dnsmasq 
 }
 
 if [ ! -f "/tmp/dnsmasq_tmp" ]; then 
