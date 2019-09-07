@@ -25,6 +25,9 @@ echo "sshd: ALL">/etc/hosts.allow
 timedatectl set-timezone Asia/Shanghai
 #添加定时重启计划
 echo "0 3 * * * root reboot">>/etc/crontab
+#更改开机启动时间0S
+sed 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
+update-grub
 
 read -s -n1 -p "安装完毕，非游戏机请按任意键优化tcp连接"
 ##BBR以及内核优化
