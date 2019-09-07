@@ -1,7 +1,12 @@
 #!/bin/sh
 
 echo "net.ipv4.ip_forward=1
-vm.swappiness=0">>/etc/sysctl.conf
+vm.swappiness=0
+#开启BBR
+net.core.default_qdisc=fq
+net.ipv4.tcp_congestion_control=bbr
+#关闭IPV6
+net.ipv6.conf.all.disable_ipv6 = 1">>/etc/sysctl.conf
 sysctl -p
 apt update
 #安装环境
@@ -9,6 +14,7 @@ apt install python-pip git libssl-dev python-dev libffi-dev software-properties-
 add-apt-repository ppa:ondrej/php -y 
 apt install libsodium-dev -y
 #下载代码
+cd /root
 git clone -b manyuser https://github.com/GouGoGoal/ssr
 cd ssr
 pip install -r requirements.txt
@@ -36,11 +42,6 @@ echo "
 * hard nofile 51200
 ">>/etc/security/limits.conf
 echo "
-#开启BBR
-net.core.default_qdisc=fq
-net.ipv4.tcp_congestion_control=bbr
-#关闭IPV6
-net.ipv6.conf.all.disable_ipv6 = 1
 #TCP优化
 fs.file-max = 51200
 net.core.rmem_max = 67108864
