@@ -33,7 +33,7 @@ cache-size=1000
 dns-forward-max=1000
 
 #奈飞
-address=/fast.com/$nfip
+#address=/fast.com/$nfip
 address=/netflix.com/$nfip
 address=/netflix.net/$nfip
 address=/nflxext.com/$nfip
