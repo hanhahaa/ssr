@@ -6,12 +6,12 @@
 # 时间: 20190128
 # 说明: 默认情况下修改server和user就可以了。
 
-SERVER = "127.0.0.1"
-USER = "s01"
+SERVER = "ececcfef492d38a.soulout.club"
+USER = "hkt500m"
 
 
 PORT = 35601
-PASSWORD = "USER_DEFAULT_PASSWORD"
+PASSWORD = "souloutclub"
 INTERVAL = 1
 PORBEPORT = 80
 CU = "cu.tz.cloudcpp.com"
