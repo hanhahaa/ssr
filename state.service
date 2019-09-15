@@ -1,0 +1,14 @@
+[Unit]
+Description=state deamon
+After=rc-local.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/root/ssr
+ExecStart=/usr/bin/python state.py
+Restart=always
+LimitNOFILE=512000
+[Install]
+WantedBy=multi-user.target
