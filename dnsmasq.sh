@@ -72,6 +72,10 @@ address=/brightcove.com/$jpip
 #niconico
 address=/nicovideo.jp/$jpip
 address=/nimg.jp/$jpip
+
+#屏蔽不爱国地址
+address=/dafahao.com/127.0.0.1
+
 ">/etc/dnsmasq.conf
 systemctl restart dnsmasq 
 }
