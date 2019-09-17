@@ -31,7 +31,6 @@ echo "sshd: ALL">/etc/hosts.allow
 timedatectl set-timezone Asia/Shanghai
 #添加定时重启计划
 echo "0 3 * * * root reboot
-0 4 * * 1 root rm -rf /var/log/*">>/etc/crontab
 #更改开机启动时间0S
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
 update-grub
