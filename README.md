@@ -33,7 +33,9 @@ echo "sshd: ALL" > /etc/hosts.allow<br>
 
 ## Debian时区更改
 
-timedatectl set-timezone Asia/Shanghai
+timedatectl set-timezone Asia/Shanghai</br>
+
+Debian8  dpkg-reconfigure tzdata</br>
 
 #### 上边不行用下边
 
