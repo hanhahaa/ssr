@@ -1,18 +1,8 @@
-### 加速脚本选择
-wget -N --no-check-certificate "https://raw.githubusercontent.com/gougogoal/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh<br>
 ### 重装Debian9
-wget --no-check-certificate  https://moeclub.org/attachment/LinuxShell/InstallNET.sh <br>
-### Linux测试脚本
-wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash<br>
-
-### 阿里云一键净化<br>
-wget https://raw.githubusercontent.com/MeowLove/AlibabaCloud-CentOS7-Pure-and-safe/master/download/kill/Snapshot_image.sh && chmod +x Snapshot_image.sh
-
-### Iptable脚本
-wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/iptables-pf.sh && chmod +x iptables-pf.sh 
-
+bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh') -d 9 -v 64 -a <br>
+ 
 ### 一键后端安装
-wget -N --no-check-certificate https://raw.githubusercontent.com/gougogoal/plane/manyuser/setup.sh 
+bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/setup.sh') 44
 
 ## Debian安装步骤
 
@@ -27,19 +17,19 @@ apt install libsodium-dev -y <br>
 
 git clone -b manyuser https://github.com/GouGoGoal/ssr<br>
 cd ssr<br>
+pip install --upgrade setuptools 
 pip install -r requirements.txt<br>
 cp apiconfig.py userapiconfig.py<br>
 cp config.json user-config.json<br>
 
 ### 配置systemd，开机自启SS后端
 
-cp -r /root/shadowsocks/ssr.service /etc/systemd/system/<br>
+cp -r /root/ssr/ssr.service /etc/systemd/system/<br>
 systemctl start ssr<br>
 systemctl enable ssr<br>
 echo "sshd: ALL" > /etc/hosts.allow<br>
 
 #防止 auto block 了自己无法连接 ssh
-
 
 ## Debian时区更改
 
