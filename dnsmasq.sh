@@ -77,7 +77,7 @@ address=/nimg.jp/$jpip
 address=/dafahao.com/127.0.0.1
 
 ">/etc/dnsmasq.conf
-systemctl restart dnsmasq 
+systemctl restart dnsmasq ssr v2ray
 }
 
 if [ ! -f "/tmp/dnsmasq_tmp" ]; then 
