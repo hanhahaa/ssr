@@ -17,6 +17,7 @@ apt install libsodium-dev -y
 cd /root
 git clone -b manyuser https://github.com/GouGoGoal/ssr
 cd ssr
+pip install --upgrade setuptools 
 pip install -r requirements.txt
 cp apiconfig.py userapiconfig.py
 cp config.json user-config.json
