@@ -7,7 +7,7 @@
 # 说明: 默认情况下修改server和user就可以了。
 
 SERVER = "ececcfef492d38a.soulout.club"
-USER = "hkt500m"
+USER = "lovegoogle.xyz"
 
 
 PORT = 35601
