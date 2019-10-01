@@ -8,6 +8,7 @@
 #内网IP，请在管理界面查看
 inip=10.111.102.100
 
+#ip1=$inip
 ip1=`ping -c1 sgp.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
 ip1port=8080
 port1=8080
