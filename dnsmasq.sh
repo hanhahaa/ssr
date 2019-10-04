@@ -9,10 +9,10 @@ nfip=$hkip
 
 #写入dnsmasq缓存
 touch_dnsmasq_tmp() {
-echo "old_twip='"$twip"'
-old_hkip='"$hkip"'
-old_sgip='"$sgip"'
-old_jpip='"$jpip"'">/tmp/dnsmasq_tmp
+echo "old_twip=$twip
+old_hkip=$hkip
+old_sgip=$sgip
+old_jpip=$jpip">/tmp/dnsmasq_tmp
 }
 
 #定义刷新dnsmasq参数并重启的函数
