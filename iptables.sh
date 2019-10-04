@@ -1,5 +1,5 @@
 
-#!/bin/sh
+#!/bin/bash
 
 #ip=ping -c1 欲转发域名|awk -F'[(|)]' 'NR==1{print $2}'`
 #欲转发域名的端口
@@ -27,7 +27,7 @@ port1=8080
 
 
 touch_iptables_tmp() {
-echo 'old_ip1=$ip1'>/tmp/iptables_tmp
+echo "old_ip1=$ip1">/tmp/iptables_tmp
 }
 
 reset_iptables() {
@@ -72,13 +72,13 @@ else
 	echo "存在缓存，检查是否有变化"
         .  /tmp/iptables_tmp
 	#对比IP变化，有变化就刷新iptables
-	if [ $ip1 == "$old_ip1"];then
+	if [ $ip1 == "$old_ip1" ];then
 	    echo "无变化，退出脚本"
 	    exit
 	else 
 	    echo "IP有变动，刷新配置和缓存"
 	    reset_iptables
-      touch_iptables_tmp
+            touch_iptables_tmp
 	fi
 	        
 fi
