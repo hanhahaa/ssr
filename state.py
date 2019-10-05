@@ -6,11 +6,11 @@
 # 时间: 20190128
 # 说明: 默认情况下修改server和user就可以了。
 
-SERVER = "ececcfef492d38a.soulout.club"
+SERVER = "cn-state.outsoul.club"
 USER = "lovegoogle.xyz"
 
 
-PORT = 35601
+PORT = 43054
 PASSWORD = "souloutclub"
 INTERVAL = 1
 PORBEPORT = 80
