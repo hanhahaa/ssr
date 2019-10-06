@@ -3,7 +3,7 @@
 #获取当前的流媒体解锁IP
 twip=`ping -c1 hinet-gaoxiong.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
 hkip=`ping -c1 hkt.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
-sgip=`ping -c1 sgp.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
+#sgip=`ping -c1 sgp.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
 jpip=`ping -c1 jp.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
 nfip=$hkip
 
@@ -85,7 +85,7 @@ else
 	echo "存在缓存，检查是否有变化"
         .  /tmp/dnsmasq_tmp
 	#对比IP变化，有变化就刷新重启dnsmasq
-	if [ $twip == "$old_twip" -a $hkip == "$old_hkip" -a $sgip == "$old_sgip" -a $jpip == "$old_jpip" ];then
+	if [ $twip == "$old_twip" -a $hkip == "$old_hkip" -a $jpip == "$old_jpip" ];then
 	    echo "无变化，退出脚本"
 	    exit
 	else 
