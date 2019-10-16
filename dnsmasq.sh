@@ -49,7 +49,6 @@ address=/tvb.com/$hkip
 address=/gamer.com.tw/$twip
 address=/bahamut.com.tw/$twip
 address=/hinet.net/$twip
-address=/fbcdn.net/$twip
 address=/gvt1.com/$twip
 address=/digicert.com/$twip
 address=/viblast.com/$twip
