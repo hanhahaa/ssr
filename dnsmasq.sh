@@ -49,15 +49,12 @@ address=/tvb.com/$hkip
 address=/gamer.com.tw/$twip
 address=/bahamut.com.tw/$twip
 address=/hinet.net/$twip
-address=/gvt1.com/$twip
-address=/digicert.com/$twip
-address=/viblast.com/$twip
 #B站
 address=/bilibili.com/$twip
 address=/hdslb.com/$twip
 #LineTV
-address=/line.me/$twip
-address=/line-apps.com/$twip
+#address=/line.me/$twip
+#address=/line-apps.com/$twip
 
 #日本AbemaTV
 address=/abema.tv/$jpip
