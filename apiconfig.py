@@ -19,9 +19,9 @@ WEBAPI_TOKEN = "souloutclub"
 MUDB_FILE = "mudb.json"
 
 # Mysql
-MYSQL_HOST = "ececcfef492d38a.soulout.club"
+MYSQL_HOST = "3306.soulout.club"
 MYSQL_PORT = 3306
-MYSQL_USER = "souloutclub"
+MYSQL_USER = "souloutclub@souloutclub"
 MYSQL_PASS = "souloutclub"
 MYSQL_DB = "panel"
 
