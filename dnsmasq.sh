@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #获取当前的流媒体解锁IP
-twip=`ping -c1 hinet-gaoxiong.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
+twip=`ping -c1 hinet-changhua.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
 hkip=`ping -c1 hkt.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
 #sgip=`ping -c1 sgp.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
 jpip=`ping -c1 jp.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
