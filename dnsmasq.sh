@@ -3,7 +3,7 @@
 #获取当前的流媒体解锁IP
 twip=`ping -c1 unlock.tw.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 hkip=`ping -c1 unlock.hk.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
-jpip=`ping -c1 unlock.jp.lovegoogle.xyz|awk -F'[(|)]' 'NR==1{print $2}'`
+jpip=`ping -c1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 #sgip=`ping -c1 unlock.sgp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 
 nfip=$hkip
