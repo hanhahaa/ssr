@@ -6,7 +6,7 @@
 # 时间: 20190128
 # 说明: 默认情况下修改server和user就可以了。
 
-SERVER = "cn-state.outsoul.club"
+SERVER = "cn-state.soulout.club"
 USER = "lovegoogle.xyz"
 
 
