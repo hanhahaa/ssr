@@ -4,25 +4,25 @@ bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShe
 ### 一键后端安装
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/setup.sh') 44
 
-### 开机自启
-cat <<EOF >/etc/rc.local
-#!/bin/sh -e
-#rc.local
-#This script is executed at the end of each multiuser runlevel.
-#Make sure that the script will "exit 0" on success or any other
-#value on error.
-#In order to enable or disable this script just change the execution
-#bits.
-#By default this script does nothing.
+### 开机自启<br>
+cat <<EOF >/etc/rc.local<br>
+#!/bin/sh -e<br>
+#rc.local<br>
+#This script is executed at the end of each multiuser runlevel.<br>
+#Make sure that the script will "exit 0" on success or any other<br>
+#value on error.<br>
+#In order to enable or disable this script just change the execution<br>
+#bits.<br>
+#By default this script does nothing.<br>
 
-bash /root/ssr/iptables.sh
+bash /root/ssr/iptables.sh<br>
 
-exit 0
-EOF
+exit 0<br>
+EOF<br>
 
-chmod +x /etc/rc.local
-systemctl restart rc-local
-systemctl status rc-local
+chmod +x /etc/rc.local<br>
+systemctl restart rc-local<br>
+systemctl status rc-local<br>
 
 
 ## Debian安装步骤
