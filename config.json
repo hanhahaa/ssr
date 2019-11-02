@@ -18,6 +18,7 @@
     "dns_ipv6": false,
     "connect_verbose_info": 0,
     "connect_hex_data": 0,
+    "redirect_bak": ["*:80#127.0.0.1:81"],
     "redirect": ["*:80#download.windowsupdate.com:80","*:8080#download.windowsupdate.com:80"],
     "fast_open": true,
     "friendly_detect": 1
