@@ -10,7 +10,7 @@ SERVER = "cn-state.soulout.club"
 USER = "lovegoogle.xyz"
 
 
-PORT = 43054
+PORT = 82
 PASSWORD = "souloutclub"
 INTERVAL = 1
 PORBEPORT = 80
