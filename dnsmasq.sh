@@ -76,6 +76,7 @@ address=/epochtimes.com/127.0.0.1
 address=/dongtaiwang.com/127.0.0.1
 address=/wujieliulan.com/127.0.0.1
 address=/mhradio.org/127.0.0.1
+address=/ntdtv.com/127.0.0.1
 ">/etc/dnsmasq.conf
 systemctl restart dnsmasq ssr v2ray
 }
