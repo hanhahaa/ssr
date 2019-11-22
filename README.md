@@ -1,3 +1,5 @@
+### 测速脚本
+curl -fsSL https://ilemonrain.com/download/shell/LemonBench.sh | bash -s fast<br>
 ### 重装Debian9
 bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh') -d 9 -v 64 -a <br>
 密码  MoeClub.org
