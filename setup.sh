@@ -30,12 +30,15 @@ systemctl restart ssr
 echo "sshd: ALL">/etc/hosts.allow
 #修改时区
 timedatectl set-timezone Asia/Shanghai
-#添加定时重启计划
+#添加定时重启、释放内存计划
+chmod 755 /root/ssr/freeram.sh
 echo "0 3 * * * root init 6
 */10 * * * * root /root/ssr/freeram.sh">>/etc/crontab
 #更改开机启动时间0S
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
 update-grub
+#添加探针服务
+cp state.service /etc/systemd/system
 
 read -s -n1 -p "安装完毕，非游戏机请按任意键优化tcp连接"
 ##BBR以及内核优化
