@@ -70,6 +70,7 @@ address=/nicovideo.jp/$jpip
 address=/nimg.jp/$jpip
 
 #屏蔽不爱国地址
+address=/falunaz.net/127.0.0.1
 address=/falundafa.org/127.0.0.1
 address=/minghui.org/127.0.0.1
 address=/epochtimes.com/127.0.0.1
