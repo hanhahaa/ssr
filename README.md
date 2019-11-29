@@ -5,7 +5,8 @@ bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShe
 密码  MoeClub.org
 ### 重装Debian10
 bash <(wget --no-check-certificate -qO- 'https://www.cxthhhhh.com/tech-tools/Network-Reinstall-System-Modify/CoreShell/Core_Install.sh' ) -d 10 -v 64 -a<br>
- 密码  cxthhhhh.com
+ 密码  cxthhhhh.com<br>
+ 国内源      --mirror 'http://mirrors.ustc.edu.cn/debian/'
 ### 一键后端安装
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/setup.sh') 44
 
