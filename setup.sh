@@ -7,6 +7,10 @@ net.core.default_qdisc=fq
 net.ipv4.tcp_congestion_control=bbr
 #关闭IPV6
 net.ipv6.conf.all.disable_ipv6 = 1">>/etc/sysctl.conf
+echo "
+root soft nofile 51200
+root hard nofile 51200
+">>/etc/security/limits.conf
 sysctl -p
 apt update
 #安装环境
@@ -42,10 +46,6 @@ cp state.service /etc/systemd/system
 
 read -s -n1 -p "安装完毕，非游戏机请按任意键优化tcp连接"
 ##BBR以及内核优化
-echo "
-* soft nofile 51200
-* hard nofile 51200
-">>/etc/security/limits.conf
 echo "
 #TCP优化
 fs.file-max = 51200
