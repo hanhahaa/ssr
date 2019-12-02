@@ -40,7 +40,9 @@ cp state.service /etc/systemd/system
 read -s -n1 -p "安装完毕，非游戏机请按任意键优化tcp连接"
 ##BBR以及内核优化
 echo "
+#开启内核转发
 net.ipv4.ip_forward=1
+#优先使用ram
 vm.swappiness=0
 #开启BBR
 net.core.default_qdisc=fq
