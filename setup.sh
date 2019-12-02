@@ -40,6 +40,8 @@ cp state.service /etc/systemd/system
 read -s -n1 -p "安装完毕，非游戏机请按任意键优化tcp连接"
 ##BBR以及内核优化
 echo "
+#关闭IPV6
+net.ipv6.conf.all.disable_ipv6 = 1
 #开启内核转发
 net.ipv4.ip_forward=1
 #优先使用ram
@@ -47,8 +49,6 @@ vm.swappiness=0
 #开启BBR
 net.core.default_qdisc=fq
 net.ipv4.tcp_congestion_control=bbr
-#关闭IPV6
-net.ipv6.conf.all.disable_ipv6 = 1
 #对于一个新建连接，内核要发送多少个 SYN 连接请求才决定放弃。
 net.ipv4.tcp_syn_retries = 1
 #对于远端的连接请求SYN，内核会发送SYN ＋ ACK数据报，以确认收到上一个 SYN连接请求包
@@ -85,7 +85,7 @@ net.ipv4.tcp_tw_reuse = 1
 net.ipv4.ip_local_port_range = 10000 65000
 net.ipv4.tcp_fastopen = 3
 net.ipv4.tcp_mtu_probing = 1
-">>/etc/sysctl.conf
+">/etc/sysctl.conf
 sysctl -p
 ###########
 
