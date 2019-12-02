@@ -69,7 +69,9 @@ address=/brightcove.com/$jpip
 address=/nicovideo.jp/$jpip
 address=/nimg.jp/$jpip
 
-#屏蔽不爱国地址
+#屏蔽地址
+address=/gov.cn/127.0.0.1
+address=/12377.cn/127.0.0.1
 address=/falunaz.net/127.0.0.1
 address=/falundafa.org/127.0.0.1
 address=/minghui.org/127.0.0.1
