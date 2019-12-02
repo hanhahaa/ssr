@@ -47,7 +47,6 @@ cp state.service /etc/systemd/system
 read -s -n1 -p "安装完毕，非游戏机请按任意键优化tcp连接"
 ##BBR以及内核优化
 echo "
-#TCP优化
 #对于一个新建连接，内核要发送多少个 SYN 连接请求才决定放弃。
 net.ipv4.tcp_syn_retries = 1
 #对于远端的连接请求SYN，内核会发送SYN ＋ ACK数据报，以确认收到上一个 SYN连接请求包
@@ -74,7 +73,7 @@ net.ipv4.tcp_wmem = 8192 131072 16777216
 net.ipv4.tcp_rmem = 32768 131072 16777216
 #
 net.ipv4.tcp_mem = 786432 1048576 1572864
-#系统支持的最大ipv4连接数
+
 fs.file-max = 51200
 net.core.rmem_max = 67108864
 net.core.wmem_max = 67108864
