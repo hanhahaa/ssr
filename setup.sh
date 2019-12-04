@@ -28,6 +28,7 @@ echo "0 3 * * * root init 6
 */10 * * * * root /root/ssr/freeram.sh">>/etc/crontab
 #添加探针服务
 cp state.service /etc/systemd/system
+chmod 755 besttrace
 
 read -s -n1 -p "安装完毕，非游戏机请按任意键优化tcp连接"
 #优化最大文件打开
