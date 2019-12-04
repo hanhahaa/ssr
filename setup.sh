@@ -2,10 +2,9 @@
 
 apt update
 #安装环境
-apt install python-pip git libssl-dev python-dev libffi-dev software-properties-common vim -y
+apt install python-pip git libssl-dev python-dev libffi-dev software-properties-common vim python-m2crypto -y
 add-apt-repository ppa:ondrej/php -y 
 apt install libsodium-dev -y
-apt install python-m2crypto
 #下载代码
 cd /root
 git clone -b manyuser https://github.com/GouGoGoal/ssr
