@@ -1,10 +1,5 @@
 #!/bin/sh
 
-echo "
-root soft nofile 512000
-root hard nofile 512000
-">>/etc/security/limits.conf
-sysctl -p
 apt update
 #安装环境
 apt install python-pip git libssl-dev python-dev libffi-dev software-properties-common vim -y
@@ -31,14 +26,16 @@ timedatectl set-timezone Asia/Shanghai
 chmod 755 /root/ssr/freeram.sh
 echo "0 3 * * * root init 6
 */10 * * * * root /root/ssr/freeram.sh">>/etc/crontab
-#更改开机启动时间0S
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
-update-grub
 #添加探针服务
 cp state.service /etc/systemd/system
 
 read -s -n1 -p "安装完毕，非游戏机请按任意键优化tcp连接"
-##BBR以及内核优化
+#优化最大文件打开
+echo "
+root soft nofile 512000
+root hard nofile 512000
+">>/etc/security/limits.conf
+#BBR以及内核优化
 echo "
 #关闭IPV6
 net.ipv6.conf.all.disable_ipv6 = 1
@@ -70,5 +67,9 @@ net.ipv4.tcp_wmem = 4096 65536 67108864
 net.ipv4.tcp_mtu_probing = 1
 ">/etc/sysctl.conf
 sysctl -p
+read -s -n1 -p "更改开机等待时间"
+#更改开机启动时间1S
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
+update-grub
 ###########
 
