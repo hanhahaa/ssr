@@ -1,4 +1,5 @@
 ### 测速脚本
+wget -qO- bench.sh | bash        纯净<br>
 bash <(wget --no-check-certificate -qO- 'https://ilemonrain.com/download/shell/LemonBench.sh') --mode fast <br>
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/oooldking/script/master/superbench.sh')<br>
 ### 重装Debian9
