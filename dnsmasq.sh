@@ -69,6 +69,11 @@ address=/brightcove.com/$jpip
 address=/nicovideo.jp/$jpip
 address=/nimg.jp/$jpip
 
+#使用流媒体解锁服务
+#server=/abema.tv/198.13.32.209
+#server=/ameblo.jp/198.13.32.209
+#server=/akamaized.net/198.13.32.209
+
 #屏蔽地址
 address=/gov.cn/127.0.0.1
 address=/12377.cn/127.0.0.1
