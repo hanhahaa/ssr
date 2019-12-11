@@ -9,6 +9,7 @@ bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShe
 国内源      --mirror 'http://mirrors.ustc.edu.cn/debian/'<br>
 密码  MoeClub.org<br>
 ## 一键后端安装
+apt install wget -y<br>
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/setup.sh') 44
 
 ## 开机自启<br>
