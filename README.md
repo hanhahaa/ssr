@@ -4,25 +4,16 @@ bash <(wget --no-check-certificate -qO- 'https://ilemonrain.com/download/shell/L
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/oooldking/script/master/superbench.sh')<br>
 bash <(wget --no-check-certificate -qO- 'https://git.io/superspeed' )<br>
 ### 重装Debian9
-bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh') -d 9 -v 64 -a <br>
-密码  MoeClub.org
-### 重装Debian10
-bash <(wget --no-check-certificate -qO- 'https://www.cxthhhhh.com/tech-tools/Network-Reinstall-System-Modify/CoreShell/Core_Install.sh' ) -d 10 -v 64 -a<br>
- 密码  cxthhhhh.com<br>
- 国内源      --mirror 'http://mirrors.ustc.edu.cn/debian/'
+apt install wget -y<br>
+bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh') -d 10 -v 64 -a <br>
+国内源      --mirror 'http://mirrors.ustc.edu.cn/debian/'<br>
+密码  MoeClub.org<br>
 ### 一键后端安装
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/setup.sh') 44
 
 ### 开机自启<br>
 cat <<EOF >/etc/rc.local<br>
 #!/bin/sh -e<br>
-#rc.local<br>
-#This script is executed at the end of each multiuser runlevel.<br>
-#Make sure that the script will "exit 0" on success or any other<br>
-#value on error.<br>
-#In order to enable or disable this script just change the execution<br>
-#bits.<br>
-#By default this script does nothing.<br>
 
 bash /root/ssr/iptables.sh<br>
 
