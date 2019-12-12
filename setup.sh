@@ -24,8 +24,13 @@ echo "sshd: ALL">/etc/hosts.allow
 timedatectl set-timezone Asia/Shanghai
 #添加定时重启、释放内存计划
 chmod 755 /root/ssr/freeram.sh
-echo "0 3 * * * root init 6
-*/10 * * * * root /root/ssr/freeram.sh">>/etc/crontab
+echo "
+#每晚三点重启
+0 3 * * * root init 6
+#每隔10分钟检查内存，高则自动释放
+*/10 * * * * root /root/ssr/freeram.sh
+#每月1日删除日志
+0 5 1 * * root rm -rf /var/log/*.gz ">>/etc/crontab
 #添加探针服务
 cp state.service /etc/systemd/system
 chmod 755 besttrace
@@ -48,7 +53,7 @@ net.ipv4.ip_forward=1
 #优先使用ram
 vm.swappiness=0
 #TCP优化
-fs.file-max = 51200
+fs.file-max = 512000
 net.core.rmem_max = 67108864
 net.core.wmem_max = 67108864
 net.core.netdev_max_backlog = 250000
