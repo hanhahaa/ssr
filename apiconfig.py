@@ -10,7 +10,7 @@ MU_SUFFIX = "microsoft.com"
 MU_REGEX = "%4m.%suffix"
 
 SERVER_PUB_ADDR = "127.0.0.1"  # mujson_mgr need this to generate ssr link
-API_INTERFACE = "glzjinmod"  # glzjinmod, modwebapi
+API_INTERFACE = "modwebapi"  # glzjinmod, modwebapi
 
 WEBAPI_URL = "https://api.soulout.club"
 WEBAPI_TOKEN = "souloutclub"
