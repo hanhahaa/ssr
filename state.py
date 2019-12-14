@@ -7,7 +7,7 @@
 # 说明: 默认情况下修改server和user就可以了。
 
 SERVER = "cn-state.soulout.club"
-USER = "lovegoogle.xyz"
+USER = ".lovegoogle.xyz"
 
 
 PORT = 82
