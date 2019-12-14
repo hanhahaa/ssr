@@ -4,7 +4,7 @@
 twip=`ping -c1 unlock.tw.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 hkip=`ping -c1 unlock.hk.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 jpip=`ping -c1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
-#usip=`ping -c1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
+usip=`ping -c1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 
 nfip=$hkip
 
@@ -12,7 +12,7 @@ nfip=$hkip
 touch_dnsmasq_tmp() {
 echo "old_twip=$twip
 old_hkip=$hkip
-old_sgip=$sgip
+old_usip=$usip
 old_jpip=$jpip">/tmp/dnsmasq_tmp
 }
 
@@ -97,7 +97,7 @@ else
 	echo "存在缓存，检查是否有变化"
         .  /tmp/dnsmasq_tmp
 	#对比IP变化，有变化就刷新重启dnsmasq
-	if [ $twip == "$old_twip" -a $hkip == "$old_hkip" -a $jpip == "$old_jpip" ];then
+	if [ $twip == "$old_twip" -a $hkip == "$old_hkip" -a $jpip == "$old_jpip" -a $usip == "$old_usip" ];then
 	    echo "无变化，退出脚本"
 	    exit
 	else 
