@@ -31,11 +31,16 @@ echo "
 */10 * * * * root /root/ssr/freeram.sh
 #每月1日删除日志
 0 5 1 * * root rm -rf /var/log/*.gz ">>/etc/crontab
+
+read -s -n1 -p "安装完毕，是否添加探针服务"
 #添加探针服务
 mv state.service /etc/systemd/system
 chmod 755 besttrace
+sed -i "10s/node/$2/" state.py
+systemctl enable state
+systemctl restart state
 
-read -s -n1 -p "安装完毕，是否优化系统参数"
+read -s -n1 -p "是否优化系统参数"
 #优化最大文件打开
 echo "
 root soft nofile 512000
