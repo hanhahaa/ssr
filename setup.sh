@@ -32,7 +32,7 @@ echo "
 #每月1日删除日志
 0 5 1 * * root rm -rf /var/log/*.gz ">>/etc/crontab
 #添加探针服务
-cp state.service /etc/systemd/system
+mv state.service /etc/systemd/system
 chmod 755 besttrace
 
 read -s -n1 -p "安装完毕，是否优化系统参数"
