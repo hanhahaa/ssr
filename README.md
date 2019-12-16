@@ -24,6 +24,7 @@ chmod +x /etc/rc.local<br>
 systemctl restart rc-local<br>
 systemctl status rc-local<br>
 
+## web_transfer.py 第 365行
 
 ## Debian安装步骤
 
