@@ -14,9 +14,6 @@ PORT = 82
 PASSWORD = "souloutclub"
 INTERVAL = 1
 PORBEPORT = 80
-CU = "cu.tz.cloudcpp.com"
-CT = "ct.tz.cloudcpp.com"
-CM = "cm.tz.cloudcpp.com"
 
 import socket
 import time
@@ -149,104 +146,6 @@ def tupd():
     d = int(s[:-1])-2
     return t,u,p,d
 
-def ip_status():
-    ip_check = 0
-    for i in [CU, CT, CM]:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(1)
-        try:
-            s.connect((i, PORBEPORT))
-        except:
-            ip_check += 1
-        s.close()
-        del s
-    if ip_check >= 2:
-        return False
-    else:
-        return True
-
-def get_network(ip_version):
-    if(ip_version == 4):
-        HOST = "ipv4.google.com"
-    elif(ip_version == 6):
-        HOST = "ipv6.google.com"
-    try:
-        s = socket.create_connection((HOST, 80), 2)
-        s.close()
-        return True
-    except:
-        return False
-
-lostRate = {
-    '10010': 0.0,
-    '189': 0.0,
-    '10086': 0.0
-}
-pingTime = {
-    '10010': 0,
-    '189': 0,
-    '10086': 0
-}
-def _ping_thread(host, mark, port):
-    lostPacket = 0
-    allPacket = 0
-    startTime = time.time()
-
-    while True:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(1)
-        try:
-            b = timeit.default_timer()
-            s.connect((host, port))
-            pingTime[mark] = int((timeit.default_timer()-b)*1000)
-        except:
-            lostPacket += 1
-        finally:
-            allPacket += 1
-        s.close()
-
-        if allPacket > 100:
-            lostRate[mark] = float(lostPacket) / allPacket
-
-        endTime = time.time()
-        if endTime - startTime > 3600:
-            lostPacket = 0
-            allPacket = 0
-            startTime = endTime
-
-        time.sleep(1)
-
-def get_packetLostRate():
-    t1 = threading.Thread(
-        target=_ping_thread,
-        kwargs={
-            'host': CU,
-            'mark': '10010',
-            'port': PORBEPORT
-        }
-    )
-    t2 = threading.Thread(
-        target=_ping_thread,
-        kwargs={
-            'host': CT,
-            'mark': '189',
-            'port': PORBEPORT
-        }
-    )
-    t3 = threading.Thread(
-        target=_ping_thread,
-        kwargs={
-            'host': CM,
-            'mark': '10086',
-            'port': PORBEPORT
-        }
-    )
-    t1.setDaemon(True)
-    t2.setDaemon(True)
-    t3.setDaemon(True)
-    t1.start()
-    t2.start()
-    t3.start()
 
 if __name__ == '__main__':
     for argc in sys.argv:
@@ -261,7 +160,6 @@ if __name__ == '__main__':
         elif 'INTERVAL' in argc:
             INTERVAL = int(argc.split('INTERVAL=')[-1])
     socket.setdefaulttimeout(30)
-    get_packetLostRate()
     while 1:
         try:
             print("Connecting...")
@@ -302,11 +200,9 @@ if __name__ == '__main__':
                 Load_1, Load_5, Load_15 = os.getloadavg()
                 MemoryTotal, MemoryUsed, SwapTotal, SwapFree = get_memory()
                 HDDTotal, HDDUsed = get_hdd()
-                IP_STATUS = ip_status()
 
                 array = {}
                 if not timer:
-                    array['online' + str(check_ip)] = get_network(check_ip)
                     timer = 10
                 else:
                     timer -= 1*INTERVAL
@@ -326,13 +222,6 @@ if __name__ == '__main__':
                 array['network_tx'] = NetTx
                 array['network_in'] = NET_IN
                 array['network_out'] = NET_OUT
-                array['ip_status'] = IP_STATUS
-                array['ping_10010'] = lostRate.get('10010') * 100
-                array['ping_189'] = lostRate.get('189') * 100
-                array['ping_10086'] = lostRate.get('10086') * 100
-                array['time_10010'] = pingTime.get('10010')
-                array['time_189'] = pingTime.get('189')
-                array['time_10086'] = pingTime.get('10086')
                 array['tcp'], array['udp'], array['process'], array['thread'] = tupd()
 
                 s.send("update " + json.dumps(array) + "\n")
