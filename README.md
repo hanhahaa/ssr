@@ -3,7 +3,7 @@ wget -qO- bench.sh | bash        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;纯净<br>
 bash <(wget --no-check-certificate -qO- 'https://ilemonrain.com/download/shell/LemonBench.sh') --mode fast <br>
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/oooldking/script/master/superbench.sh')<br>
 bash <(wget --no-check-certificate -qO- 'https://git.io/superspeed' )<br>
-## 重装Debian9
+## 重装Debian10
 bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh') -d 10 -v 64 -a <br>
 国内源      --mirror 'http://mirrors.ustc.edu.cn/debian/'<br>
 密码  MoeClub.org<br>
