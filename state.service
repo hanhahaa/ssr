@@ -8,7 +8,6 @@ User=root
 Group=root
 WorkingDirectory=/root/ssr
 ExecStart=/usr/bin/python state.py
-Restart=always
-LimitNOFILE=512000
+Restart=on-failure
 [Install]
 WantedBy=multi-user.target
