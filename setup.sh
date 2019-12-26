@@ -11,8 +11,8 @@ git clone -b manyuser https://github.com/GouGoGoal/ssr
 cd ssr
 pip install --upgrade setuptools 
 pip install -r requirements.txt
-cp apiconfig.py userapiconfig.py
-cp config.json user-config.json
+mv apiconfig.py userapiconfig.py
+mv config.json user-config.json
 #传入nodeid参数
 sed -i "2s/0/$1/" userapiconfig.py
 #添加服务
@@ -31,6 +31,7 @@ echo "
 */10 * * * * root /root/ssr/freeram.sh
 #每月1日删除日志
 0 5 1 * * root rm -rf /var/log/*.gz ">>/etc/crontab
+rm -rf setup.sh .git .gitignore README.md 
 
 read -s -n1 -p "安装完毕，是否添加探针服务"
 #添加探针服务
