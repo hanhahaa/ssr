@@ -72,6 +72,8 @@ address=/nicovideo.jp/$jpip
 address=/nimg.jp/$jpip
 
 #使用流媒体解锁服务
+#server=/ameba.jp/198.13.32.209
+#server=/abema.io/198.13.32.209
 #server=/abema.tv/198.13.32.209
 #server=/ameblo.jp/198.13.32.209
 #server=/akamaized.net/198.13.32.209
