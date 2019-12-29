@@ -57,6 +57,8 @@ address=/hdslb.com/$twip
 #address=/line.me/$twip
 #address=/line-apps.com/$twip
 #日本AbemaTV
+address=/ameba.jp/$jpip
+address=/abema.io/$jpip
 address=/abema.tv/$jpip
 address=/ameblo.jp/$jpip
 address=/akamaized.net/$jpip
