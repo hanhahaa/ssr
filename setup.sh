@@ -29,8 +29,8 @@ echo "
 0 3 * * * root init 6
 #每隔10分钟检查内存，高则自动释放
 */10 * * * * root /root/ssr/freeram.sh
-#每月1日删除日志
-0 5 1 * * root rm -rf /var/log/*.gz ">>/etc/crontab
+#每周一删除日志
+29 2 * * 1 root rm -rf /var/log/*.gz ">>/etc/crontab
 rm -rf setup.sh .git .gitignore README.md 
 
 read -s -n1 -p "安装完毕，是否添加探针服务"
