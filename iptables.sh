@@ -4,7 +4,7 @@
 # https://soulout.club  的帅比站长制作
 #需要修改内核参数支持转发；在 /etc/sysctl.conf 添加一行  net.ipv4.ip_forward=1 ，之后 sysctl -p
 #并设置定时任务，每分钟执行一次，不会请谷歌
-#与iptables转发链规则冲突，可添加规则到reset_iptables函数，如无必要，docker请使用桥接模式
+#与iptables转发链规则冲突，可添加规则到reset_iptables函数，如无必要，docker请使用host模式
 
 
 #ip=ping -c1 欲转发域名|awk -F'[(|)]' 'NR==1{print $2}'`
