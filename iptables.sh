@@ -84,7 +84,7 @@ else
 	echo "存在缓存，检查是否有变化"
         .  /tmp/iptables_tmp
 	#对比IP变化，有变化就刷新iptables
-	#if [ $ip1 == "$old_ip1" -a $ip2 == "$old_ip2" ];then
+	#if [ $ip1 == "$old_ip1" -a $ip2 == "$old_ip2" ];then 如果转发的更多，请按照格式添加
 	if [ $ip1 == "$old_ip1" ];then
 	    echo "无变化，退出脚本"
 	    exit
