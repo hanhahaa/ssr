@@ -36,10 +36,10 @@ dns-forward-max=1000
 #奈飞
 #address=/fast.com/$nfip
 address=/netflix.com/$nfip
-address=/netflix.net/$nfip
-address=/nflxext.com/$nfip
-address=/nflximg.net/$nfip
-address=/nflxso.net/$nfip
+#address=/netflix.net/$nfip
+#address=/nflxext.com/$nfip
+#address=/nflximg.net/$nfip
+#address=/nflxso.net/$nfip
 address=/nflxvideo.net/$nfip
 
 #香港TVB
