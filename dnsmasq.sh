@@ -10,15 +10,18 @@ nfip=$hkip
 
 #写入dnsmasq缓存
 touch_dnsmasq_tmp() {
-echo "old_twip=$twip
+echo "
+old_twip=$twip
 old_hkip=$hkip
 old_usip=$usip
-old_jpip=$jpip">/tmp/dnsmasq_tmp
+old_jpip=$jpip
+">/tmp/dnsmasq_tmp
 }
 
 #定义刷新dnsmasq参数并重启的函数
 flush_dnsmasq_conf() {
-echo "#验证域名
+echo "
+#验证域名
 domain-needed
 #定义上游DNS
 all-servers
@@ -30,8 +33,8 @@ addn-hosts=/etc/hosts
 #监听地址
 listen-address=127.0.0.1
 #最大缓存条数
-cache-size=1000
-dns-forward-max=1000
+cache-size=1024
+dns-forward-max=1024
 
 #奈飞
 #address=/fast.com/$nfip
@@ -70,6 +73,9 @@ address=/brightcove.com/$jpip
 #niconico
 address=/nicovideo.jp/$jpip
 address=/nimg.jp/$jpip
+#hulu.jp
+address=/hulu.jp/$jpip
+address=/happyon.jp/$jpip
 
 #使用流媒体解锁服务
 #server=/ameba.jp/198.13.32.209
