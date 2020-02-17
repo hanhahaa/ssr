@@ -47,7 +47,7 @@ yum install python-pip python-devel openssl-devel  libffi libffi-dev <br>
 
 git clone -b manyuser https://github.com/GouGoGoal/ssr<br>
 cd ssr<br>
-pip install --upgrade setuptools 
+pip install --upgrade setuptools <br>
 pip install -r requirements.txt<br>
 cp apiconfig.py userapiconfig.py<br>
 cp config.json user-config.json<br>
