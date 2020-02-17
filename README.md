@@ -39,6 +39,10 @@ apt install python-pip git libssl-dev python-dev libffi-dev software-properties-
 add-apt-repository ppa:ondrej/php -y && apt update<br>
 apt install libsodium-dev -y <br>
 
+
+## CentOS安装<br>
+yum install python-pip python-devel openssl-devel  libffi libffi-dev <br>
+
 ### 下载SSR后端脚本并修改配置
 
 git clone -b manyuser https://github.com/GouGoGoal/ssr<br>
