@@ -16,7 +16,7 @@ mv config.json user-config.json
 #传入nodeid参数
 sed -i "2s/0/$1/" userapiconfig.py
 #添加服务
-mv -r /root/ssr/ssr.service /etc/systemd/system/
+mv  /root/ssr/ssr.service /etc/systemd/system/
 systemctl enable ssr
 systemctl restart ssr
 echo "sshd: ALL">/etc/hosts.allow
