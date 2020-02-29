@@ -16,7 +16,7 @@ mv config.json user-config.json
 #传入nodeid参数
 sed -i "2s/0/$1/" userapiconfig.py
 #添加服务
-cp -r /root/ssr/ssr.service /etc/systemd/system/
+mv -r /root/ssr/ssr.service /etc/systemd/system/
 systemctl enable ssr
 systemctl restart ssr
 echo "sshd: ALL">/etc/hosts.allow
@@ -32,6 +32,8 @@ echo "
 #每周一删除日志
 29 2 * * 1 root rm -rf /var/log/*.gz ">>/etc/crontab
 rm -rf setup.sh .git .gitignore README.md 
+chmod 755 besttrace
+mv besttrace /usr/bin
 
 read -s -n1 -p "安装完毕，是否添加探针服务"
 #添加探针服务
