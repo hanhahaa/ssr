@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 # Update by : https://github.com/cppla/ServerStatus
-# 支持Python版本：2.7 to 3.5
+# 支持Python版本：2.7 to 3.7
 # 支持操作系统： Linux, OSX, FreeBSD, OpenBSD and NetBSD, both 32-bit and 64-bit architectures
-# 时间: 20190128
+# 时间: 20191224
 # 说明: 默认情况下修改server和user就可以了。
 
 SERVER = "cn-state.soulout.club"
@@ -63,6 +63,7 @@ def get_time():
     for i in range(len(time_list))  :
         time_list[i] = int(time_list[i])
     return time_list
+
 def delta_time():
     x = get_time()
     time.sleep(INTERVAL)
@@ -70,13 +71,14 @@ def delta_time():
     for i in range(len(x)):
         y[i]-=x[i]
     return y
+
 def get_cpu():
     t = delta_time()
     st = sum(t)
     if st == 0:
         st = 1
     result = 100-(t[len(t)-1]*100.00/st)
-    return round(result)
+    return round(result, 1)
 
 class Traffic:
     def __init__(self):
@@ -142,10 +144,24 @@ def tupd():
     u = int(s[:-1])-1
     s = subprocess.check_output("ps -ef|wc -l", shell=True)
     p = int(s[:-1])-2
-    s = subprocess.check_output("ps -xH|wc -l", shell=True)
+    s = subprocess.check_output("ps -eLf|wc -l", shell=True)
     d = int(s[:-1])-2
     return t,u,p,d
 
+
+
+def byte_str(object):
+    '''
+    bytes to str, str to bytes
+    :param object:
+    :return:
+    '''
+    if isinstance(object, str):
+        return object.encode(encoding="utf-8")
+    elif isinstance(object, bytes):
+        return bytes.decode(object)
+    else:
+        print(type(object))
 
 if __name__ == '__main__':
     for argc in sys.argv:
@@ -165,10 +181,10 @@ if __name__ == '__main__':
             print("Connecting...")
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((SERVER, PORT))
-            data = s.recv(1024)
+            data = byte_str(s.recv(1024))
             if data.find("Authentication required") > -1:
-                s.send(USER + ':' + PASSWORD + '\n')
-                data = s.recv(1024)
+                s.send(byte_str(USER + ':' + PASSWORD + '\n'))
+                data = byte_str(s.recv(1024))
                 if data.find("Authentication successful") < 0:
                     print(data)
                     raise socket.error
@@ -177,18 +193,9 @@ if __name__ == '__main__':
                 raise socket.error
 
             print(data)
-            data = s.recv(1024)
+            data = byte_str(s.recv(1024))
             print(data)
 
-            timer = 0
-            check_ip = 0
-            if data.find("IPv4") > -1:
-                check_ip = 6
-            elif data.find("IPv6") > -1:
-                check_ip = 4
-            else:
-                print(data)
-                raise socket.error
 
             traffic = Traffic()
             traffic.get()
@@ -202,10 +209,7 @@ if __name__ == '__main__':
                 HDDTotal, HDDUsed = get_hdd()
 
                 array = {}
-                if not timer:
-                    timer = 10
-                else:
-                    timer -= 1*INTERVAL
+
 
                 array['uptime'] = Uptime
                 array['load_1'] = Load_1
@@ -224,7 +228,7 @@ if __name__ == '__main__':
                 array['network_out'] = NET_OUT
                 array['tcp'], array['udp'], array['process'], array['thread'] = tupd()
 
-                s.send("update " + json.dumps(array) + "\n")
+                s.send(byte_str("update " + json.dumps(array) + "\n"))
         except KeyboardInterrupt:
             raise
         except socket.error:
