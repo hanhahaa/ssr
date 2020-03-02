@@ -7,7 +7,7 @@ Type=simple
 User=root
 Group=root
 WorkingDirectory=/root/ssr
-ExecStart=/usr/bin/python state.py
+ExecStart=/usr/bin/python3 state.py
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
