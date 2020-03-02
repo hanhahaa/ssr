@@ -2,16 +2,17 @@
 
 apt update
 #安装环境
-apt install python3 python3-pip git libssl-dev libffi-dev software-properties-common vim python-m2crypto libsodium-dev -y
-add-apt-repository ppa:ondrej/php -y 
-apt install libsodium-dev -y
-
+#apt install python3 python3-pip git libssl-dev libffi-dev software-properties-common vim python-m2crypto libsodium-dev -y
+#add-apt-repository ppa:ondrej/php -y 
+#apt install libsodium-dev -y
+apt install -y python3 python3-pip git libsodium-dev vim libssl-dev swig 
 #下载代码
 cd /root
 git clone -b manyuser https://github.com/GouGoGoal/ssr
 cd ssr
-pip install --upgrade setuptools 
-pip install -r requirements.txt
+pip3 install --upgrade setuptools 
+pip3 install M2Crypto
+pip3 install -r requirements.txt
 mv apiconfig.py userapiconfig.py
 mv config.json user-config.json
 #传入nodeid参数
