@@ -82,7 +82,6 @@ net.ipv4.tcp_wmem = 4096 65536 67108864
 net.ipv4.tcp_mtu_probing = 1
 ">/etc/sysctl.conf
 sysctl -p
-read -s -n1 -p "更改开机等待时间，仅KVM"
 #更改开机启动时间1S
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
 update-grub
