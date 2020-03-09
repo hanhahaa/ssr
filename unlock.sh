@@ -11,6 +11,5 @@ echo "* * * * * root /root/ssr/dnsmasq.sh">>/etc/crontab
 #更改DNS，并设置为只读
 echo "nameserver 127.0.0.1">/etc/resolv.conf
 chattr +i /etc/resolv.conf
-
-systemctl restart ssr
+rm -f /root/ssr/unlock.sh
 
