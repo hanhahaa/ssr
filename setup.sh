@@ -11,8 +11,8 @@ cd /root
 git clone -b manyuser https://github.com/GouGoGoal/ssr
 cd ssr
 pip3 install --upgrade setuptools 
-pip3 install M2Crypto
-pip3 install -r requirements.txt
+pip3 install M2Crypto cymysql requests pyOpenSSL ndg-httpsclient pyasn1 pycparser pycryptodome idna speedtest-cli
+#pip3 install -r requirements.txt
 mv apiconfig.py userapiconfig.py
 mv config.json user-config.json
 #传入nodeid参数
