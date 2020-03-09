@@ -46,7 +46,7 @@ sed -i "10s/node/$2/" state.py
 systemctl enable state
 systemctl restart state
 
-read -s -n1 -p "是否优化系统参数"
+read -s -n1 -p "开启BBR、优化，缩小开机等待时间"
 #优化最大文件打开
 echo "
 root soft nofile 512000
