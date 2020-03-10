@@ -25,15 +25,16 @@ systemctl restart ssr
 echo "sshd: ALL">/etc/hosts.allow
 #修改时区
 timedatectl set-timezone Asia/Shanghai
+#赋予脚本可执行权限
+chmod  755 /root/ssr/*.sh
 #添加定时重启、释放内存计划
-chmod 755 /root/ssr/freeram.sh
 echo "
 #每晚三点重启
 0 3 * * * root init 6
 #每隔10分钟检查内存，高则自动释放
 */10 * * * * root /root/ssr/freeram.sh
 #每周一删除日志
-29 2 * * 1 root rm -rf /var/log/*.gz ">>/etc/crontab
+25 2 * * 1 root rm -rf /var/log/*log.* ">>/etc/crontab
 rm -rf setup.sh .git .gitignore README.md 
 chmod 755 besttrace
 mv besttrace /usr/bin
