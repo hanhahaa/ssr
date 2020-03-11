@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ "$1" == '' ];then
+echo "未赋值，退出脚本"
+exit 0
+fi
+
 apt update
 #安装环境
 #apt install python3 python3-pip git libssl-dev libffi-dev software-properties-common vim python-m2crypto libsodium-dev -y
@@ -39,18 +44,21 @@ rm -rf setup.sh .git .gitignore README.md
 chmod 755 besttrace
 mv besttrace /usr/bin
 
-if [ $2 -ne '' ];then
-    #添加探针服务
-    mv state.service /etc/systemd/system
-    sed -i "10s/node/$2/" state.py
-    systemctl enable state
-    systemctl restart state
-    echo '$2.lovegoogle.xyz已添加探针'
-    
-else echo "未添加探针"
+if [ "$2" == '' ];then
+echo "未添加指针，退出脚本"
+exit 0
 fi
+#添加探针服务
+mv state.service /etc/systemd/system
+sed -i "10s/node/$2/" state.py
+systemctl enable state
+systemctl restart state
+echo '$2.lovegoogle.xyz已添加探针'
 
-if [ $3 -ne '' ];then
+if [ "$3" == '' ];then
+echo "未优化参数，未开启BBR，未修改启动时间"
+exit 0
+fi
 #优化最大文件打开
 echo "
 root soft nofile 512000
@@ -91,7 +99,4 @@ sysctl -p
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
 update-grub
 echo "已优化参数，已开启BBR，已修改启动时间"
-else echo "未优化参数，未开启BBR，未修改启动时间"
-fi
-###########
 
