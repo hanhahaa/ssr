@@ -39,15 +39,18 @@ rm -rf setup.sh .git .gitignore README.md
 chmod 755 besttrace
 mv besttrace /usr/bin
 
-read -s -n1 -p "安装完毕，是否添加探针服务"
-#添加探针服务
-mv state.service /etc/systemd/system
-chmod 755 besttrace
-sed -i "10s/node/$2/" state.py
-systemctl enable state
-systemctl restart state
+if [ $2 -ne '' ];then
+    #添加探针服务
+    mv state.service /etc/systemd/system
+    sed -i "10s/node/$2/" state.py
+    systemctl enable state
+    systemctl restart state
+    echo '$2.lovegoogle.xyz已添加探针'
+    
+else echo "未添加探针"
+fi
 
-read -s -n1 -p "开启BBR、优化，缩小开机等待时间"
+if [ $3 -ne '' ];then
 #优化最大文件打开
 echo "
 root soft nofile 512000
@@ -87,5 +90,8 @@ sysctl -p
 #更改开机启动时间1S
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
 update-grub
+echo "已优化参数，已开启BBR，已修改启动时间"
+else echo "未优化参数，未开启BBR，未修改启动时间"
+fi
 ###########
 
