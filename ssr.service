@@ -8,5 +8,6 @@ WorkingDirectory=/root/ssr
 ExecStart=/usr/bin/python3 server.py
 Restart=on-failure
 LimitNOFILE=512000
+# MemoryHigh=512M
 [Install]
 WantedBy=multi-user.target
