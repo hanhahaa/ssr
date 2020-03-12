@@ -55,10 +55,17 @@ systemctl enable state
 systemctl restart state
 echo "$2.lovegoogle.xyz已添加探针"
 
-if [ "$3" == '' ];then
-echo "未优化参数，未开启BBR，未修改启动时间"
+if [ "$3" == "ovz" ];then
+echo "
+#关闭IPV6
+net.ipv6.conf.all.disable_ipv6 = 1
+#开启内核转发
+net.ipv4.ip_forward=1
+">/etc/sysctl.conf
+echo "已针对OVZ优化参数"
 exit 0
 fi
+
 #优化最大文件打开
 echo "
 root soft nofile 512000
@@ -98,5 +105,5 @@ sysctl -p
 #更改开机启动时间1S
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
 update-grub
-echo "已优化参数，已开启BBR，已修改启动时间"
+echo "针对kvm优化参数，已开启BBR，已修改启动时间"
 
