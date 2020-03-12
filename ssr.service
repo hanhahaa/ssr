@@ -9,8 +9,8 @@ ExecStart=/usr/bin/python3 server.py
 Restart=on-failure
 LimitNOFILE=512000
 # 柔性限制
-# MemoryHigh=512M
+# MemoryHigh=20%
 # 刚性限制
-# MemoryMax=700M
+# MemoryMax=25%
 [Install]
 WantedBy=multi-user.target
