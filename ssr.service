@@ -6,7 +6,7 @@ After=rc-local.service
 Type=simple
 WorkingDirectory=/root/ssr
 ExecStart=/usr/bin/python3 server.py
-Restart=on-failure
+Restart=always
 LimitNOFILE=512000
 # 柔性限制
 # MemoryHigh=20%
