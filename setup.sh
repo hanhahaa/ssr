@@ -53,7 +53,7 @@ mv state.service /etc/systemd/system
 sed -i "10s/node/$2/" state.py
 systemctl enable state
 systemctl restart state
-echo '$2.lovegoogle.xyz已添加探针'
+echo "$2.lovegoogle.xyz已添加探针"
 
 if [ "$3" == '' ];then
 echo "未优化参数，未开启BBR，未修改启动时间"
