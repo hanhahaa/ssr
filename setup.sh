@@ -37,7 +37,7 @@ echo "
 #每晚三点重启
 0 3 * * * root init 6
 #每隔10分钟检查内存，高则自动释放
-#*/10 * * * * root /root/ssr/freeram.sh
+*/10 * * * * root /root/ssr/freeram.sh
 #每周一删除日志
 25 2 * * 1 root rm -rf /var/log/*log.* ">>/etc/crontab
 rm -rf setup.sh .git .gitignore README.md 
