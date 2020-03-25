@@ -1,12 +1,12 @@
 [Unit]
-Description=ssr deamon
+Description=SSR deamon
 After=rc-local.service
 
 [Service]
 Type=simple
-WorkingDirectory=/root/ssr
-ExecStart=/usr/bin/python3 server.py
-Restart=always
+PIDFile=/var/run/ssr.pid
+ExecStart=/usr/bin/python3 /root/ssr/server.py
+Restart=on-failure
 LimitNOFILE=512000
 # 柔性限制
 # MemoryHigh=95%
