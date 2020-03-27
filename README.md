@@ -4,7 +4,7 @@ curl -fsL https://ilemonra.in/LemonBenchIntl | bash -s fast <br>
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/oooldking/script/master/superbench.sh')<br>
 bash <(wget --no-check-certificate -qO- 'https://git.io/superspeed' )<br>
 ## 重装Debian10
-bash <(wget --no-check-certificate -qO- 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh') -d 10 -v 64 -a <br>
+bash <(wget --no-check-certificate -qO- 'https://github.com/GouGoGoal/SSPanel-Uim/raw/master/InstallNET.sh') -d 10 -v 64 -a
 国内源      --mirror 'http://mirrors.ustc.edu.cn/debian/'<br>
 日本源      --mirror 'http://ftp.jp.debian.org/debian/'<br>
 台湾源      --mirror 'http://ftp.tw.debian.org/debian/'<br>
