@@ -82,6 +82,8 @@ net.ipv4.tcp_congestion_control=bbr
 net.ipv4.ip_forward=1
 #优先使用ram
 vm.swappiness=0
+#可以分配所有物理内存
+vm.overcommit_memory=1
 #TCP优化
 fs.file-max = 512000
 net.core.rmem_max = 67108864
