@@ -74,3 +74,8 @@ cat /etc/profile |grep TZ<br>
 source /etc/profile<br>
 date -R<br>
 
+
+```
+优先使用IPV6地址 
+echo "precedence ::ffff:0:0/96  100" >>/etc/gai.conf
+```
