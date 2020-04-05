@@ -66,6 +66,8 @@ echo "已针对OVZ优化参数"
 exit 0
 fi
 
+#优先使用IPV6地址 
+echo "precedence ::ffff:0:0/96  100" >>/etc/gai.conf
 #优化最大文件打开
 echo "
 root soft nofile 512000
