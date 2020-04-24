@@ -28,6 +28,9 @@ all-servers
 server=1.1.1.1
 server=8.8.8.8
 query-port=54
+#不使用/etc/resolv.conf
+no-resolv
+no-poll
 #引入/etc/hosts文件
 addn-hosts=/etc/hosts
 #监听地址
