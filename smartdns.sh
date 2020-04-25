@@ -89,7 +89,7 @@ address /hulu.jp/$jpip
 address /happyon.jp/$jpip
 ">/etc/smartdns.conf
 #重启服务
-systemctl restart smartdns ssr v2ray docker 
+systemctl restart smartdns ssr v2ray 
 }
 
 
@@ -111,7 +111,7 @@ else
 	else 
 	    echo "IP有变动，刷新配置和缓存"
 	    flush_smartdns_conf
-        touch_smartdns_tmp
+            touch_smartdns_tmp
 	fi
 	        
 fi
