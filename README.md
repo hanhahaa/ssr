@@ -1,8 +1,6 @@
 ## 测速脚本
 ```
-wget -qO- bench.sh | bash        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;纯净
-curl -fsL https://ilemonra.in/LemonBenchIntl | bash -s fast 
-bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/oooldking/script/master/superbench.sh')
+wget -qO- bench.sh | bash        纯净
 bash <(wget --no-check-certificate -qO- 'https://git.io/superspeed' )
 ```
 ## 重装Debian10
