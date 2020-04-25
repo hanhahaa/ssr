@@ -101,18 +101,18 @@ else
 	echo "存在缓存，检查是否有变化"
         .  /tmp/smartdns_tmp
 	#如果有空缓存，直接退出
-    if [ $twip == "" -o $hkip == "" -o $jpip == "" -o $usip == "" ];then
+    if [ "$twip" == "" -o "$hkip" == "" -o $jpip == "" -o "$usip" == "" ];then
 	    echo "域名IP获取失败，退出脚本"
 	    exit
     fi 
 	#对比IP变化，有变化就刷新重启smartdns
-	if [ $twip == "$old_twip" -a $hkip == "$old_hkip" -a $jpip == "$old_jpip" -a $usip == "$old_usip" ];then
+    if [ "$twip" == "$old_twip" -a "$hkip" == "$old_hkip" -a "$jpip" == "$old_jpip" -a "$usip" == "$old_usip" ];then
 	    echo "无变化，退出脚本"
-	else 
+    else 
 	    echo "IP有变动，刷新配置和缓存"
 	    flush_smartdns_conf
             touch_smartdns_tmp
-	fi
+    fi
 	        
 fi
 
