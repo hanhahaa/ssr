@@ -1,0 +1,16 @@
+[Unit]
+Description=smartdns server
+After=network.target 
+
+[Service]
+Type=forking
+PIDFile=/var/run/smartdns.pid
+ExecStart=/usr/bin/smartdns
+Restart=always
+RestartSec=2
+StartLimitBurst=0
+StartLimitIntervalSec=60
+
+[Install]
+WantedBy=multi-user.target
+Alias=smartdns.service
