@@ -101,7 +101,7 @@ else
 	echo "存在缓存，检查是否有变化"
         .  /tmp/smartdns_tmp
 	#如果有空缓存，直接退出
-    if [ "$twip" == "" -o "$hkip" == "" -o $jpip == "" -o "$usip" == "" ];then
+    if [ "$twip" == "" -o "$hkip" == "" -o "$jpip" == "" -o "$usip" == "" ];then
 	    echo "域名IP获取失败，退出脚本"
 	    exit
     fi 
