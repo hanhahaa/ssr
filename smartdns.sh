@@ -9,6 +9,24 @@ usip=`ping -c1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 #奈飞IP，就近解锁，美国鸡就写usip
 nfip=$hkip
 
+#检查swap使用量，如果超过物理内存的20%，则重启服务
+freeram() {
+#获取总共内存
+totally_ram=`free -m | awk '/Mem/ {print $2}'`
+#获取当前使用的swap量
+used_swap=`free -m | awk '/Swap/ {print $3}'`
+#如果总内存/swap用量小于5，即swap超过物理内存的20%
+if [ $totally_ram/$used_swap -lt 5 ]; then
+       #内存释放执行的命令,重启docker之类的
+       echo "重启SSR、V2ray服务，释放内存"
+       systemctl restart ssr v2ray
+       swapoff -a && swapon -a
+else
+       echo "内存无需释放"
+fi
+}
+
+
 #写入smartdns缓存
 touch_smartdns_tmp() {
 echo "
@@ -92,7 +110,6 @@ address /happyon.jp/$jpip
 systemctl restart smartdns ssr v2ray 
 }
 
-
 if [ ! -f "/tmp/smartdns_tmp" ]; then 
 	echo "无缓存，写入缓存并刷新配置"
         touch_smartdns_tmp
@@ -108,6 +125,8 @@ else
 	#对比IP变化，有变化就刷新重启smartdns
     if [ "$twip" == "$old_twip" -a "$hkip" == "$old_hkip" -a "$jpip" == "$old_jpip" -a "$usip" == "$old_usip" ];then
 	    echo "无变化，退出脚本"
+	    #检查内存剩余，可关闭
+            freeram
     else 
 	    echo "IP有变动，刷新配置和缓存"
 	    flush_smartdns_conf
