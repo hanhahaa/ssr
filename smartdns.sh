@@ -21,11 +21,16 @@ if [ "$used_swap" -eq 0 ]; then
 elif [ "$totally_ram"/"$used_swap" -lt 10 ]; then
        #内存释放执行的命令,重启docker之类的
        echo "重启SSR、V2ray服务，释放内存"
-       systemctl restart ssr v2ray
+       restart_service
        swapoff -a && swapon -a
 else 
        exit
 fi
+}
+
+#重启服务
+restart_service() {
+       systemctl restart ssr v2ray
 }
 
 
@@ -109,7 +114,7 @@ address /hulu.jp/$jpip
 address /happyon.jp/$jpip
 ">/etc/smartdns.conf
 #重启服务
-systemctl restart smartdns ssr v2ray 
+restart_service 
 }
 
 if [ ! -f "/tmp/smartdns_tmp" ]; then 
