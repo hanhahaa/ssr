@@ -6,7 +6,7 @@ After=rc-local.service
 Type=simple
 PIDFile=/var/run/ssr.pid
 ExecStart=/usr/bin/python3 /root/ssr/server.py
-Restart=on-failure
+Restart=always
 LimitNOFILE=512000
 # 柔性限制
 # MemoryHigh=95%
