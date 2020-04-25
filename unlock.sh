@@ -29,6 +29,6 @@ else
     sed -i '$i\iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53' /etc/rc.local
 fi
 
-#更改DNS，并设置为只读
-echo "nameserver 127.0.0.1">/etc/resolv.conf
-chattr +i /etc/resolv.conf
+#已劫持DNS，无需再更改
+#echo "nameserver 127.0.0.1">/etc/resolv.conf
+#chattr +i /etc/resolv.conf
