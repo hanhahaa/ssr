@@ -56,6 +56,13 @@ bind 127.0.0.1
 #上游tcp查询，可以再添加所在地域的DNS
 server-tcp 1.1.1.1:53
 server-tcp 8.8.8.8:53
+#HiNetDNS
+server-tcp 168.95.1.1:53
+#HKBNDNS
+server-tcp 203.80.96.10:53
+#NTTDNS
+server-tcp 129.250.35.250:53
+
 #TCP查询超时5s
 tcp-idle-time 60
 #本地缓存条数
