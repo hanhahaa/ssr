@@ -21,7 +21,7 @@ used_swap=`free -m | awk '/Swap/ {print $3}'`
 #如果swap=0,则退出脚本，如果总内存/swap用量小于10，即swap超过物理内存的10%
 if [ "$used_swap" -eq 0 ]; then
         exit 
-elif [ "$totally_ram"/"$used_swap" -lt 10 ]; then
+elif [ `expr $totally_ram / $used_swap` -lt 10 ]; then
        #内存释放执行的命令,重启docker之类的
        echo "重启SSR、V2ray服务，释放内存"
        restart_service
