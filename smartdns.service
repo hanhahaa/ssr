@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-PIDFile=/var/run/smartdns.pid
+PIDFile=/run/smartdns.pid
 ExecStart=/usr/bin/smartdns -f -c /etc/smartdns.conf
 Restart=always
 
