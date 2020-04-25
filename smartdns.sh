@@ -117,7 +117,6 @@ if [ ! -f "/tmp/smartdns_tmp" ]; then
         touch_smartdns_tmp
         flush_smartdns_conf
 else
-	echo "存在缓存，检查是否有变化"
         .  /tmp/smartdns_tmp
 	#如果有空缓存，直接退出
     if [ "$twip" == "" -o "$hkip" == "" -o "$jpip" == "" -o "$usip" == "" ];then
@@ -126,7 +125,6 @@ else
     fi 
 	#对比IP变化，有变化就刷新重启smartdns
     if [ "$twip" == "$old_twip" -a "$hkip" == "$old_hkip" -a "$jpip" == "$old_jpip" -a "$usip" == "$old_usip" ];then
-	    echo "无变化，退出脚本"
 	    #检查内存剩余，可关闭
             freeram
     else 
