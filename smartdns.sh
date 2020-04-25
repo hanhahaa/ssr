@@ -5,7 +5,10 @@ twip=`ping -c1 unlock.tw.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 hkip=`ping -c1 unlock.hk.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 jpip=`ping -c1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 usip=`ping -c1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
-
+if "$twip" = "" ; then twip="#" fi
+if "$hkip" = "" ; then hkip="#" fi
+if "$jpip" = "" ; then jpip="#" fi
+if "$usip" = "" ; then usip="#" fi
 #奈飞IP，就近解锁，美国鸡就写usip
 nfip=$hkip
 
@@ -123,11 +126,6 @@ if [ ! -f "/tmp/smartdns_tmp" ]; then
         flush_smartdns_conf
 else
         .  /tmp/smartdns_tmp
-	#如果有空缓存，直接退出
-    if [ "$twip" == "" -o "$hkip" == "" -o "$jpip" == "" -o "$usip" == "" ];then
-	    echo "域名IP获取失败，退出脚本"
-	    exit
-    fi 
 	#对比IP变化，有变化就刷新重启smartdns
     if [ "$twip" == "$old_twip" -a "$hkip" == "$old_hkip" -a "$jpip" == "$old_jpip" -a "$usip" == "$old_usip" ];then
 	    #检查内存剩余，可关闭
