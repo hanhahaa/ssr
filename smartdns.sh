@@ -119,6 +119,7 @@ address /hulu.jp/$jpip
 address /happyon.jp/$jpip
 ">/etc/smartdns.conf
 #重启服务
+systemctl restart smartdns
 restart_service 
 }
 
