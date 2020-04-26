@@ -69,8 +69,8 @@ serve-expired no
 #测速模式选择，先ping，不通再tcping 80
 speed-check-mode ping,tcp:80
 #双栈IP优选
-dualstack-ip-selection yes
-dualstack-ip-selection-threshold 30
+dualstack-ip-selection no
+#dualstack-ip-selection-threshold 30
 #完全不解析IPV6
 #force-AAAA-SOA yes
 #日志级别 error
