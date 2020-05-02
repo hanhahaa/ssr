@@ -5,10 +5,15 @@ bash <(wget --no-check-certificate -qO- 'https://git.io/superspeed' )
 ```
 ## 重装Debian10
 ```
-bash <(wget --no-check-certificate -qO- 'https://github.com/GouGoGoal/SSPanel-Uim/raw/master/InstallNET.sh') -d 10 -v 64 -a [-i ens4]
-国内源      --mirror 'http://mirrors.ustc.edu.cn/debian/'
-日本源      --mirror 'http://ftp.jp.debian.org/debian/'
-台湾源      --mirror 'http://ftp.tw.debian.org/debian/'
+bash <(wget --no-check-certificate -qO- 'https://github.com/GouGoGoal/SSPanel-Uim/raw/master/InstallNET.sh') -d 10 -v 64 -a [-i ens3]
+国内源
+--mirror 'http://mirrors.ustc.edu.cn/debian/'
+香港源
+--mirror 'http://ftp.hk.debian.org/debian/'
+日本源
+--mirror 'http://ftp.jp.debian.org/debian/'
+台湾源
+--mirror 'http://ftp.tw.debian.org/debian/'
 ```
 
 ## 一键后端安装
