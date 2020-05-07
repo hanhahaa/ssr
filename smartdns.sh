@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#获取当前的流媒体解锁IP
+#获取当前的流媒体解锁IP，若查询不到则赋值为#，即空解析
 twip=`ping -c1 unlock.tw.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$twip" = "" ]; then twip="#"; fi
 hkip=`ping -c1 unlock.hk.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$hkip" = "" ]; then hkip="#"; fi
 jpip=`ping -c1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$jpip" = "" ]; then jpip="#"; fi
