@@ -20,10 +20,9 @@ if [ "$used_swap" -eq 0 ]; then
         exit 
 elif [ `expr $totally_ram / $used_swap` -lt 10 ]; then
        #内存释放执行的命令,重启docker之类的
-       echo "重启SSR、V2ray服务，释放内存"
        restart_service
        swapoff -a && swapon -a
-       echo "IP无变动，但当前RAM不足，已重启相关服务"
+       echo "$(date +"%Y-%m-%d %T") IP无变动，但当前RAM不足，已重启服务"
        exit
 fi
 }
@@ -121,7 +120,7 @@ restart_service
 }
 
 if [ ! -f "/tmp/smartdns_tmp" ]; then 
-	echo "无缓存，写入缓存并刷新配置"
+	echo "$(date +"%Y-%m-%d %T") 无缓存，写入缓存并刷新配置"
         touch_smartdns_tmp
         flush_smartdns_conf
 else
@@ -130,9 +129,9 @@ else
     if [ "$twip" == "$old_twip" -a "$hkip" == "$old_hkip" -a "$jpip" == "$old_jpip" -a "$usip" == "$old_usip" ];then
 	    #检查内存剩余，可关闭
             freeram
-	    echo "IP无变动，退出脚本"
+	    echo "$(date +"%Y-%m-%d %T") IP无变动，退出脚本"
     else 
-	    echo "IP有变动，刷新配置和缓存"
+	    echo "$(date +"%Y-%m-%d %T") IP有变动，刷新配置和缓存"
 	    flush_smartdns_conf
             touch_smartdns_tmp
     fi
