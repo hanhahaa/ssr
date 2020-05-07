@@ -25,8 +25,6 @@ elif [ `expr $totally_ram / $used_swap` -lt 10 ]; then
        swapoff -a && swapon -a
        echo "IP无变动，但当前RAM不足，已重启相关服务"
        exit
-else 
-       exit
 fi
 }
 
