@@ -1,14 +1,11 @@
 #!/bin/bash
 
 #获取当前的流媒体解锁IP
-twip=`ping -c1 unlock.tw.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
-hkip=`ping -c1 unlock.hk.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
-jpip=`ping -c1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
-usip=`ping -c1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
-if [ "$twip" = "" ]; then twip="#"; fi
-if [ "$hkip" = "" ]; then hkip="#"; fi
-if [ "$jpip" = "" ]; then jpip="#"; fi
-if [ "$usip" = "" ]; then usip="#"; fi
+twip=`ping -c1 unlock.tw.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$twip" = "" ]; then twip="#"; fi
+hkip=`ping -c1 unlock.hk.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$hkip" = "" ]; then hkip="#"; fi
+jpip=`ping -c1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$jpip" = "" ]; then jpip="#"; fi
+usip=`ping -c1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$usip" = "" ]; then usip="#"; fi
+
 #奈飞IP，就近解锁，美国鸡就写usip
 nfip=$hkip
 
@@ -26,6 +23,8 @@ elif [ `expr $totally_ram / $used_swap` -lt 10 ]; then
        echo "重启SSR、V2ray服务，释放内存"
        restart_service
        swapoff -a && swapon -a
+       echo "IP无变动，但当前RAM不足，已重启相关服务"
+       exit
 else 
        exit
 fi
@@ -133,6 +132,7 @@ else
     if [ "$twip" == "$old_twip" -a "$hkip" == "$old_hkip" -a "$jpip" == "$old_jpip" -a "$usip" == "$old_usip" ];then
 	    #检查内存剩余，可关闭
             freeram
+	    echo "IP无变动，退出脚本"
     else 
 	    echo "IP有变动，刷新配置和缓存"
 	    flush_smartdns_conf
