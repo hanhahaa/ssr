@@ -1,101 +1,68 @@
-
 #!/bin/bash
-
 # https://soulout.club  的帅比站长制作
 #需要修改内核参数支持转发；在 /etc/sysctl.conf 添加一行  net.ipv4.ip_forward=1 ，之后 sysctl -p
 #并设置定时任务，每分钟执行一次，不会请谷歌
-#CentOS机器重启不会清除/tmp下的文件，可在开机自启中添加 rm -f /tmp/tmp/iptables_tmp  一行
-#与iptables转发链规则冲突，可添加规则到reset_iptables函数，如无必要，docker请使用host模式
-if [ `whoami` -ne "root" ];then
-	echo "请以root用户执行"
-	exit 0
-fi
-
-#ip=ping -c1 欲转发域名|awk -F'[(|)]' 'NR==1{print $2}'`
-#欲转发域名的端口
-#本机转发使用的端口(和上方端口段保持一致即可)
-
-#内网IP，可通过 ip a 查看
-inip=10.111.102.100
+#与iptables转发链规则冲突，可添加规则到reset_iptables函数最后一行，如无必要，docker请使用host模式
 
 
-ip1=`ping -c1 soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
-ip1port=8080
-port1=8080
+#single_rule="本机IP 本机端口  远程IP 远程端口",无纠错，请自行检查
+#举例single_rule="192.168.1.1 1000  1.1.1.1 2000" 
+#即本机的1000端口转发1.1.1.1:2000端口，其中本机IP可通过 ip a命令查看
 
-#ip2=`ping -c1 soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
-#ip2port=8080
-#port2=8080
+#须以自然数方式递增,否则命令执行不完全
+#single_rule1="192.168.1.88 1000 cn2.lovegoogle.xyz 1990"
+#single_rule2="10.111.102.100 1001 soulout.club 8080"
+#single_rule3="10.111.102.100 1002 soulout.club 8080"
 
-#ip3=`ping -c1 soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
-#ip3port=8080
-#port3=8080
-
-#ip4格式可以转发端口段，start_end，保持这两个段的差值一致
-#ip4=`ping -c1 soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
-#ip4port_start=8080
-#ip4port_end=8080
-#port4_start=8080
-#port4_end=8080
-
-
-touch_iptables_tmp() {
-echo "old_ip1=$ip1">/tmp/iptables_tmp
-#echo "old_ip2=$ip2">>/tmp/iptables_tmp
-#echo "old_ip3=$ip3">>/tmp/iptables_tmp
-#echo "old_ip4=$ip4">>/tmp/iptables_tmp
-}
+#端口段转发，功能暂鸽
+#multi_rule1
 
 reset_iptables() {
 iptables -t nat -F POSTROUTING
 iptables -t nat -F PREROUTING
-
-
-iptables -t nat -A PREROUTING -p tcp -m tcp --dport $port1 -j DNAT --to-destination $ip1:$ip1port
-iptables -t nat -A PREROUTING -p udp -m udp --dport $port1 -j DNAT --to-destination $ip1:$ip1port
-iptables -t nat -A POSTROUTING -d $ip1 -p tcp -m tcp --dport $ip1port -j SNAT --to-source $inip
-iptables -t nat -A POSTROUTING -d $ip1 -p udp -m udp --dport $ip1port -j SNAT --to-source $inip
-
-#iptables -t nat -A PREROUTING -p tcp -m tcp --dport $port2 -j DNAT --to-destination $ip2:$ip2port
-#iptables -t nat -A PREROUTING -p udp -m udp --dport $port2 -j DNAT --to-destination $ip2:$ip2port
-#iptables -t nat -A POSTROUTING -d $ip2 -p tcp -m tcp --dport $ip2port -j SNAT --to-source $inip
-#iptables -t nat -A POSTROUTING -d $ip2 -p udp -m udp --dport $ip2port -j SNAT --to-source $inip
-
-#iptables -t nat -A PREROUTING -p tcp -m tcp --dport $port3 -j DNAT --to-destination $ip3:$ip3port
-#iptables -t nat -A PREROUTING -p udp -m udp --dport $port3 -j DNAT --to-destination $ip3:$ip3port
-#iptables -t nat -A POSTROUTING -d $ip3 -p tcp -m tcp --dport $ip3port -j SNAT --to-source $inip
-#iptables -t nat -A POSTROUTING -d $ip3 -p udp -m udp --dport $ip3port -j SNAT --to-source $inip
-
-
-#iptables -t nat -A PREROUTING -p tcp -m tcp --dport $port4_start:$port4_end -j DNAT --to-destination $ip4:$ip4port_start-$ip4port_end
-#iptables -t nat -A PREROUTING -p udp -m udp --dport $port4_start:$port4_end -j DNAT --to-destination $ip4:$ip4port_start-$ip4port_end
-#iptables -t nat -A POSTROUTING -d $ip4 -p tcp -m tcp --dport $port4_start:$port4_end -j SNAT --to-source $inip
-#iptables -t nat -A POSTROUTING -d $ip4 -p udp -m udp --dport $port4_start:$port4_end -j SNAT --to-source $inip
-
-#本地转发,手动更改端口
-#iptables -t nat -A PREROUTING -p tcp -m tcp --dport 51034 -j DNAT --to-destination $inip:80
-#iptables -t nat -A PREROUTING -p udp -m udp --dport 51034 -j DNAT --to-destination $inip:80
-#iptables -t nat -A POSTROUTING -d $inip -p tcp -m tcp --dport 80 -j SNAT --to-source $inip
-#iptables -t nat -A POSTROUTING -d $inip -p udp -m udp --dport 80 -j SNAT --to-source $inip
+i=1
+temp=single_rule${i}
+eval rule=$(echo \$$temp)
+while [ -n "$rule" ]
+do
+#读取本地IP、读取本地端口、读取远程IP、读取远程端口
+local_ip=`echo $rule | awk -F ' ' '{print $1}'` 
+local_port=`echo $rule| awk -F ' ' '{print $2}'`
+remote_ip=`echo $rule | awk -F ' ' '{print $3}'`
+remote_ip=`ping -c1 "$remote_ip"|awk -F'[(|)]' 'NR==1{print $2}'`
+remote_port=`echo $rule | awk -F ' ' '{print $4}'` && if [ -z "remote_port" ]; then echo "single_rule$i 输入有误" && exit 0; fi
+#中转TCP
+iptables -t nat -A PREROUTING -p tcp -m tcp --dport $local_port -j DNAT --to-destination $remote_ip:$remote_port
+iptables -t nat -A POSTROUTING -d $remote_ip -p tcp -m tcp --dport $remote_port -j SNAT --to-source $local_ip
+#中转UDP
+iptables -t nat -A PREROUTING -p udp -m udp --dport $local_port -j DNAT --to-destination $remote_ip:$remote_port
+iptables -t nat -A POSTROUTING -d $remote_ip -p udp -m udp --dport $remote_port -j SNAT --to-source $local_ip
+let i++
+temp=single_rule${i}
+eval rule=$(echo \$$temp)
+done
 }
 
 
-if [ ! -f "/tmp/iptables_tmp" ]; then 
-	echo "无缓存，写入缓存并刷新配置"
-        touch_iptables_tmp
-        reset_iptables
-else
-	echo "存在缓存，检查是否有变化"
-        .  /tmp/iptables_tmp
-	#对比IP变化，有变化就刷新iptables
-	#if [ $ip1 == "$old_ip1" -a $ip2 == "$old_ip2" ];then 如果转发的更多，请按照格式添加
-	if [ $ip1 == "$old_ip1" ];then
-	    echo "无变化，退出脚本"
-	    exit
-	else 
-	    echo "IP有变动，刷新配置和缓存"
-	    reset_iptables
-            touch_iptables_tmp
-	fi
-	        
+
+#主程序
+x=1
+temp=single_rule${x}
+eval rule=$(echo \$$temp)
+while [ -n "$rule" ]
+do
+remote_ip=`echo $rule| awk -F ' ' '{print $3}'`
+remote_ip=`ping -c1 "$remote_ip"|awk -F'[(|)]' 'NR==1{print $2}'`
+
+if [ -z "`iptables -nL -t nat|grep $remote_ip`" ];then
+    echo "单端口转发IP有变动，已刷新iptables规则"
+    reset_iptables > /dev/null
+    exit 0
 fi
+let x++
+temp=single_rule${x}
+eval rule=$(echo \$$temp)
+done
+echo "单端口转发IP无变动"
+
+
