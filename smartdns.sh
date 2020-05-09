@@ -49,6 +49,7 @@ flush_smartdns_conf() {
 echo "
 #绑定到本机
 bind 127.0.0.1
+#bind-tcp 127.0.0.1
 #上游tcp查询，可以再添加所在地域的DNS
 server-tcp 1.1.1.1:53
 server-tcp 8.8.8.8:53
