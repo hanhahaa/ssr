@@ -8,6 +8,7 @@ PIDFile=/run/ssr.pid
 ExecStart=/usr/bin/python3 /root/ssr/server.py
 Restart=always
 LimitNOFILE=512000
+LimitNPROC=512000
 # 柔性限制
 # MemoryHigh=95%
 # 刚性限制
