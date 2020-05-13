@@ -1,6 +1,7 @@
 [Unit]
 Description=smartdns server
-After=network.target 
+After=network.target
+Before=ssr.service v2ray.service docker.service
 
 [Service]
 Type=simple
