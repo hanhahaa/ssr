@@ -12,7 +12,7 @@ apt update
 #安装环境
 apt install -y python3 python3-pip git libsodium-dev vim libssl-dev swig
 else 
-yum update 
+yum update -y
 yum install -y python3 python3-pip git openssl-devel  libffi libffi-dev 
 fi
 
