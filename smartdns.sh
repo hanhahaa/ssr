@@ -115,7 +115,7 @@ address /nimg.jp/$jpip
 address /hulu.jp/$jpip
 address /happyon.jp/$jpip
 #PornHub
-address /pornhub.com/$jpip
+#address /pornhub.com/$jpip
 #address /phncdn.com/$jpip
 ">/etc/smartdns.conf
 #重启服务
