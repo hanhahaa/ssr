@@ -20,11 +20,14 @@ iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:5
 
 #判断是否有/etc/rc.local，若没有则添加
 if [ ! -f "/etc/rc.local" ]; then
+    if [ -f "/etc/rc.d/rc.local" ]; then
+        ln -s /etc/rc.d/rc.local /etc/rc.local
+    fi
     echo '#!/bin/sh -e
 iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53
 exit 0' >/etc/rc.local
     chmod +x /etc/rc.local
-    systemctl restart rc.local
+    systemctl restart rc-local
 else
     sed -i '$i\iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53' /etc/rc.local
 fi
