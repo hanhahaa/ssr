@@ -24,12 +24,15 @@ pip3 install --upgrade setuptools
 pip3 install cymysql requests pyOpenSSL ndg-httpsclient pyasn1 pycparser pycryptodome idna speedtest-cli
 mv apiconfig.py userapiconfig.py
 mv config.json user-config.json
+
+if [ "$1" != '0' ];then
 #传入nodeid参数
 sed -i "2s/0/$1/" userapiconfig.py
 #添加服务
 mv  /root/ssr/ssr.service /etc/systemd/system/
 systemctl enable ssr
 systemctl restart ssr
+fi
 #修改时区
 timedatectl set-timezone Asia/Shanghai
 #赋予脚本可执行权限
