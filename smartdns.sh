@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #获取当前的流媒体解锁IP，若查询不到则赋值为#，即空解析
-twip=`ping -c1 -w1 unlock.tw.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$twip" = "" ]; then twip="#"; fi
-hkip=`ping -c1 -w1 unlock.hk.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$hkip" = "" ]; then hkip="#"; fi
-jpip=`ping -c1 -w1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$jpip" = "" ]; then jpip="#"; fi
-usip=`ping -c1 -w1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$usip" = "" ]; then usip="#"; fi
+twip=`ping -c1 -w1 unlock.tw.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$twip" = "" ]; then twip="-"; fi
+hkip=`ping -c1 -w1 unlock.hk.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$hkip" = "" ]; then hkip="-"; fi
+jpip=`ping -c1 -w1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$jpip" = "" ]; then jpip="-"; fi
+usip=`ping -c1 -w1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$usip" = "" ]; then usip="-"; fi
 
 #奈飞IP，就近解锁，美国鸡就写usip
 nfip=$hkip
