@@ -22,7 +22,7 @@ elif [ `expr $totally_ram / $used_swap` -lt 10 ]; then
        #内存释放执行的命令,重启docker之类的
        restart_service
        swapoff -a && swapon -a
-       echo "$(date +"%Y-%m-%d %T") IP无变动，但当前RAM不足，已重启服务"
+       echo "$(date +"%Y-%m-%d %T") IP无变动，但当前RAM不足，已重启相关服务"
        exit
 fi
 }
