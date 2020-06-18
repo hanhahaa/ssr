@@ -955,8 +955,8 @@ class TCPRelayHandler(object):
             bind_addr = self._accept_address[0]
             bind_addr = bind_addr.replace("::ffff:", "")
 
-        #if bind_addr in self._ignore_bind_list:
-         #   bind_addr = None
+        if bind_addr in self._ignore_bind_list:
+            bind_addr = None
 
         if self._is_relay:
             bind_addr = None
