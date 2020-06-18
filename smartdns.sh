@@ -1,14 +1,22 @@
 #!/bin/bash
 
-#获取当前的流媒体解锁IP，若查询不到则赋值为#，即空解析
-twip=`ping -c1 -w1 unlock.tw.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$twip" = "" ]; then twip="-"; fi
-hkip=`ping -c1 -w1 unlock.hk.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$hkip" = "" ]; then hkip="-"; fi
-jpip=`ping -c1 -w1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$jpip" = "" ]; then jpip="-"; fi
-usip=`ping -c1 -w1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` && if [ "$usip" = "" ]; then usip="-"; fi
+#获取当前的流媒体解锁IP，若查询不到则赋值为-，即忽略解析，若只需要解锁Netflix可将其他注释掉
+twip=`ping -c1 -w1 unlock.tw.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
+hkip=`ping -c1 -w1 unlock.hk.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
+jpip=`ping -c1 -w1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` 
+usip=`ping -c1 -w1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` 
 
 #奈飞IP，就近解锁，美国鸡就写usip
 nfip=$hkip
 
+
+
+
+if [ "$twip" = "" ]; then twip="-"; fi
+if [ "$hkip" = "" ]; then hkip="-"; fi
+if [ "$jpip" = "" ]; then jpip="-"; fi
+if [ "$usip" = "" ]; then usip="-"; fi
+if [ "$nfip" = "" ]; then nfip="-"; fi
 #释放内存
 freeram() {
 #获取总共内存
@@ -29,7 +37,7 @@ fi
 
 #重启服务
 restart_service() {
-       systemctl restart ssr v2ray
+       systemctl restart ssr v2ray ssr* v2ray*
 }
 
 
@@ -87,16 +95,19 @@ address /nflxvideo.net/$nfip
 #香港TVB
 address /mytvsuper.com/$hkip
 address /tvb.com/$hkip
+#香港Viu
+address /viu.com/$hkip
 #台湾动画疯
 address /gamer.com.tw/$twip
 address /bahamut.com.tw/$twip
 address /hinet.net/$twip
+#台湾四季TV
+address /4gtv.tv/$twip
+#台湾LineTV
+address /linetv.tw/$twip
 #B站
 address /bilibili.com/$twip
 address /hdslb.com/$twip
-#LineTV
-#address /line.me/$twip
-#address /line-apps.com/$twip
 #日本AbemaTV
 address /ameba.jp/$jpip
 address /abema.io/$jpip
@@ -114,14 +125,25 @@ address /nimg.jp/$jpip
 #hulu.jp
 address /hulu.jp/$jpip
 address /happyon.jp/$jpip
+#DMM
+address /dmm.com/$jpip
 #PornHub
 #address /pornhub.com/$jpip
 #address /phncdn.com/$jpip
+#美国disneynow disney+
+address /disneynow.com/$usip
+address /disneyplus.com/$usip
+address /go.com/$usip
 ">/etc/smartdns.conf
 #重启服务
 systemctl restart smartdns
-restart_service 
+#restart_service 
 }
+
+#检查iptables规则，防止意外丢失
+if [ "`iptables -t nat -nL |grep -w 127.0.0.1:53`" == "" ]; then
+    iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53
+fi
 
 if [ ! -f "/tmp/smartdns_tmp" ]; then 
 	echo "$(date +"%Y-%m-%d %T") 无缓存，写入缓存并刷新配置"
@@ -132,14 +154,14 @@ else
 	#对比IP变化，有变化就刷新重启smartdns
     if [ "$twip" == "$old_twip" -a "$hkip" == "$old_hkip" -a "$jpip" == "$old_jpip" -a "$usip" == "$old_usip" ];then
 	    #检查内存剩余，可关闭
-            freeram
+        freeram
 	    echo "$(date +"%Y-%m-%d %T") IP无变动，退出脚本"
     else 
 	    echo "$(date +"%Y-%m-%d %T") IP有变动，刷新配置和缓存"
 	    flush_smartdns_conf
-            touch_smartdns_tmp
+        touch_smartdns_tmp
     fi
-	        
+	      
 fi
 
 

@@ -1,10 +1,23 @@
 #! /bin/bash
+
 #获取脚本相对路径
 DIR=`dirname $0`
 chmod +x  $DIR/smartdns
 mv $DIR/smartdns /usr/bin
 #加载服务
-mv $DIR/smartdns.service /etc/systemd/system
+echo "[Unit]
+Description=smartdns server
+After=network.target
+Before=ssr.service v2ray.service docker.service
+
+[Service]
+Type=simple
+PIDFile=/run/smartdns.pid
+ExecStart=/usr/bin/smartdns -f -c /etc/smartdns.conf
+Restart=always
+
+[Install]
+WantedBy=multi-user.target" >/etc/systemd/system/smartdns.service
 #服务开机自启
 systemctl enable smartdns
 #给脚本执行权限
@@ -15,23 +28,5 @@ mv $DIR/smartdns.sh /etc/smartdns.sh
 bash /etc/smartdns.sh
 #添加定时脚本
 echo "* * * * * root /etc/smartdns.sh">>/etc/crontab
-#劫持本机所有的UDP *:53 的流量到127.0.0.1:53，并将规则开机自启
-iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53
-
-#判断是否有/etc/rc.local，若没有则添加
-if [ ! -f "/etc/rc.local" ]; then
-    if [ -f "/etc/rc.d/rc.local" ]; then
-        ln -s /etc/rc.d/rc.local /etc/rc.local
-    fi
-    echo '#!/bin/sh -e
-iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53
-exit 0' >/etc/rc.local
-    chmod +x /etc/rc.local
-    systemctl restart rc-local
-else
-    sed -i '$i\iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53' /etc/rc.local
-fi
-
-#已劫持DNS，无需再更改
-#echo "nameserver 127.0.0.1">/etc/resolv.conf
-#chattr +i /etc/resolv.conf
+#脚本自删除
+rm -f  $DIR/unlock.sh
