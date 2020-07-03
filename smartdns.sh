@@ -123,8 +123,12 @@ address /brightcove.com/$jpip
 address /nicovideo.jp/$jpip
 address /nimg.jp/$jpip
 #hulu.jp
-address /hulu.jp/$jpip
-address /happyon.jp/$jpip
+#address /hulu.jp/$jpip
+address /hjholdings.tv/$jpip
+#DAZN
+address /dazn.com/$jpip
+address /indazn.com/$jpip
+address /app-measurement.com/$jpip
 #DMM
 address /dmm.com/$jpip
 #PornHub
