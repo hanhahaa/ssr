@@ -110,10 +110,7 @@ address /bilibili.com/$twip
 address /hdslb.com/$twip
 #日本AbemaTV
 address /ameba.jp/$jpip
-address /abema.io/$jpip
-address /abema.tv/$jpip
-address /ameblo.jp/$jpip
-address /akamaized.net/$jpip
+address /news-abematv.akamaized.net/$jpip
 #TVer
 address /tver.jp/$jpip
 address /amazonaws.com/$jpip

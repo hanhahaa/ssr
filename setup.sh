@@ -29,7 +29,24 @@ if [ "$1" != '0' ];then
 #传入nodeid参数
 sed -i "2s/0/$1/" userapiconfig.py
 #添加服务
-mv  /root/ssr/ssr.service /etc/systemd/system/
+echo "[Unit]
+Description=SSR deamon
+After=rc-local.service
+
+[Service]
+Type=simple
+PIDFile=/run/ssr.pid
+ExecStart=/usr/bin/python3 /root/ssr/server.py
+ExecStartPre=/bin/sleep 0.1
+Restart=always
+LimitNOFILE=512000
+LimitNPROC=512000
+# 柔性限制
+# MemoryHigh=95%
+# 刚性限制
+# MemoryMax=25%
+[Install]
+WantedBy=multi-user.target">/etc/systemd/system/ssr.service
 systemctl enable ssr
 systemctl restart ssr
 fi
@@ -52,7 +69,17 @@ exit 0
 fi
 
 #添加探针服务
-mv state.service /etc/systemd/system
+echo "[Unit]
+Description=state deamon
+After=rc-local.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /root/ssr/state.py
+ExecStartPre=/bin/sleep 0.1
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target">/etc/systemd/system/state.service
 sed -i "10s/node/$2/" state.py
 systemctl enable state
 systemctl restart state

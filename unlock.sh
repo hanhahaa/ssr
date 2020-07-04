@@ -14,6 +14,7 @@ Before=ssr.service v2ray.service docker.service
 Type=simple
 PIDFile=/run/smartdns.pid
 ExecStart=/usr/bin/smartdns -f -c /etc/smartdns.conf
+ExecStartPre=/bin/sleep 0.1
 Restart=always
 
 [Install]
