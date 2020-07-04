@@ -7,7 +7,7 @@ jpip=`ping -c1 -w1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 usip=`ping -c1 -w1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` 
 
 #奈飞IP，就近解锁，美国鸡就写usip
-nfip=$hkip
+#nfip=$hkip
 
 
 
@@ -110,6 +110,7 @@ address /bilibili.com/$twip
 address /hdslb.com/$twip
 #日本AbemaTV
 address /ameba.jp/$jpip
+address /abema.io/$jpip
 address /news-abematv.akamaized.net/$jpip
 #TVer
 address /tver.jp/$jpip
