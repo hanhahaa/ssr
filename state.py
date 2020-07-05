@@ -57,12 +57,12 @@ def get_hdd():
     return int(size), int(used)
 
 def get_time():
-    stat_file = open("/proc/stat", "r")
-    time_list = stat_file.readline().split(' ')[2:6]
-    stat_file.close()
-    for i in range(len(time_list))  :
-        time_list[i] = int(time_list[i])
-    return time_list
+    with open("/proc/stat", "r") as f:
+        time_list = f.readline().split(' ')[2:6]
+                     
+        for i in range(len(time_list))  :
+            time_list[i] = int(time_list[i])
+        return time_list
 
 def delta_time():
     x = get_time()

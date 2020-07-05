@@ -19,6 +19,9 @@ bash <(wget --no-check-certificate -qO- 'https://github.com/GouGoGoal/SSPanel-Ui
 ## 一键后端安装
 ```
 bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/setup.sh') 70 alihk1 [ovz]
+参数1填0跳过安装ssr，进行其他初始化操作
+参数填0或没有第二个参数，跳过安装监控
+参数3填ovz则不优化内核参数
 ```
 ## web_transfer.py 第 365行端口偏移
 
