@@ -84,6 +84,8 @@ log-level error
 log-file /var/log/smartdns.log
 log-size 128k
 log-num 0
+#ban掉部分域名
+conf-file /etc/ban.conf
 #奈飞
 #address /fast.com/$nfip
 address /netflix.com/$nfip
