@@ -10,12 +10,13 @@ echo "precedence ::ffff:0:0/96  100" >>/etc/gai.conf
 if [ ! -f "/etc/redhat-release" ]; then
 apt update
 #安装环境
-apt install -y python3 python3-pip git libsodium-dev vim libssl-dev swig
+apt install -y python3 python3-pip git libsodium-dev vim libssl-dev swig ntp
 else 
 yum update -y
-yum install -y python3 python3-pip git openssl-devel  libffi libffi-dev 
+yum install -y python3 python3-pip git openssl-devel  libffi libffi-dev ntp
 fi
-
+#自动同步时间
+timedatectl set-ntp true
 #下载代码
 cd /root
 git clone -b manyuser https://github.com/GouGoGoal/ssr
@@ -54,15 +55,18 @@ fi
 timedatectl set-timezone Asia/Shanghai
 #赋予脚本可执行权限
 chmod  +x /root/ssr/*.sh
-#添加定时重启、释放内存计划
+#添加计划任务
 echo "
-#每晚三点重启
-0 3 * * * root init 6
+#每天05:55执行task，
+5 55 * * * root bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/task.sh')
+#每天06:00点重启
+0 6 * * * root init 6
 #每周一删除日志
-25 2 * * 1 root rm -rf /var/log/*log.* ">>/etc/crontab
+25 2 * * 1 root rm -rf /var/log/*log.* 
+">>/etc/crontab
 rm -rf setup.sh .git .gitignore README.md 
 chmod +x besttrace
-mv besttrace /usr/bin
+mv besttrace /usr/sbin
 
 if [ "$2" != "0" -a "$2" != ""  ];then
 #添加探针服务
@@ -82,7 +86,6 @@ systemctl enable state
 systemctl restart state
 echo "$2.lovegoogle.xyz已添加探针"
 fi
-
 
 
 if [ "$3" == "ovz" ];then
@@ -138,4 +141,7 @@ net.ipv4.tcp_wmem = 4096 65536 67108864
 sysctl -p
 
 echo "针对kvm优化参数，已开启BBR，已修改启动时间"
-
+read -p "输入nodeID参数继续对接V2ray" v2_node
+if [ "$v2_node" != "" ]; then 
+bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/GouGoGoal/v2ray/master/setup.sh') $v2_node
+fi
