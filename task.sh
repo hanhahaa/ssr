@@ -11,7 +11,7 @@ sed '$i iptables -A OUTPUT -m string --string ".torrent" --algo bm --to 65535 -j
 fi
 
 #添加执行task计划任务
-if [ "`echo /etc/crontab |grep task`" == "" ];then
+if [ "`cat /etc/crontab |grep task`" == "" ];then
 echo "0 5 * * * root bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/task.sh')" >>/etc/crontab
 fi
 
