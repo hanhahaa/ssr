@@ -14,6 +14,10 @@ apt install -y python3 python3-pip git libsodium-dev vim libssl-dev swig ntp
 else 
 yum update -y
 yum install -y python3 python3-pip git openssl-devel  libffi libffi-dev ntp
+systemctl disable firewalld
+systemctl stop firewalld
+setenforce 0
+echo 'SELINUX=disabled' >/etc/selinux/config
 fi
 #自动同步时间
 timedatectl set-ntp true
@@ -57,10 +61,10 @@ timedatectl set-timezone Asia/Shanghai
 chmod  +x /root/ssr/*.sh
 #添加计划任务
 echo "
-#每天05:55执行task，
-5 55 * * * root bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/task.sh')
-#每天06:00点重启
-0 6 * * * root init 6
+#每天04:55执行task
+55 4 * * * root bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/task.sh')
+#每天05:00点重启
+0 5 * * * root init 6
 #每周一删除日志
 25 2 * * 1 root rm -rf /var/log/*log.* 
 ">>/etc/crontab
