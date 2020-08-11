@@ -40,9 +40,7 @@ After=rc-local.service
 
 [Service]
 Type=simple
-PIDFile=/run/ssr.pid
 ExecStart=/usr/bin/python3 /root/ssr/server.py
-ExecStartPre=/bin/sleep 0.1
 Restart=always
 LimitNOFILE=512000
 LimitNPROC=512000
@@ -81,7 +79,6 @@ After=rc-local.service
 [Service]
 Type=simple
 ExecStart=/usr/bin/python3 /root/ssr/state.py
-ExecStartPre=/bin/sleep 0.1
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target">/etc/systemd/system/state.service
