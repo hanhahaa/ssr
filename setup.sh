@@ -59,16 +59,19 @@ timedatectl set-timezone Asia/Shanghai
 chmod  +x /root/ssr/*.sh
 #添加计划任务
 echo "
-#每天04:55执行task
-55 4 * * * root bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/task.sh')
+#每天05:55执行task
+55 5 * * * root bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/task.sh')
 #每天05:00点重启
-0 5 * * * root init 6
+0 6 * * * root init 6
 #每周一删除日志
 25 2 * * 1 root rm -rf /var/log/*log.* 
 ">>/etc/crontab
 rm -rf setup.sh .git .gitignore README.md 
-chmod +x besttrace
 mv besttrace /usr/sbin
+chmod +x /usr/sbin/besttrace
+mv tcping /usr/sbin
+chmod +x /usr/sbin/tcping
+
 
 if [ "$2" != "0" -a "$2" != ""  ];then
 #添加探针服务
