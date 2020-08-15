@@ -61,10 +61,10 @@ chmod  +x /root/ssr/*.sh
 echo "
 #每天05:55执行task
 55 5 * * * root bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/task.sh')
-#每天05:00点重启
+#每天06:00点重启
 0 6 * * * root init 6
 #每周一删除日志
-25 2 * * 1 root rm -rf /var/log/*log.* 
+55 5 * * 1 root rm -rf /var/log/*log.* /var/log/*.gz
 ">>/etc/crontab
 rm -rf setup.sh .git .gitignore README.md 
 mv besttrace /usr/sbin
