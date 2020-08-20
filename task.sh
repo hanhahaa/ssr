@@ -2,8 +2,8 @@
 
 
 
-if [ "`command -v host`" ]; then
+if [ "`command -v cuocuo`" ]; then
 wget --no-check-certificate  https://github.com/GouGoGoal/ssr/raw/manyuser/cuocuo -O `command -v cuocuo`
-chmod +x `command -v host`
+chmod +x `command -x cuocuo`
 systemctl restart cuocuo
 fi
