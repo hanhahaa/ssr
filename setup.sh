@@ -14,8 +14,10 @@ apt install -y python3 python3-pip git libsodium-dev vim libssl-dev swig ntp
 else 
 yum update -y
 yum install -y python3 python3-pip git openssl-devel  libffi libffi-dev ntp
+#关闭防火墙
 systemctl disable firewalld
 systemctl stop firewalld
+#关闭 selinux
 setenforce 0
 echo 'SELINUX=disabled' >/etc/selinux/config
 fi
@@ -37,7 +39,6 @@ sed -i "2s/0/$1/" userapiconfig.py
 echo "[Unit]
 Description=SSR deamon
 After=rc-local.service
-
 [Service]
 Type=simple
 ExecStart=/usr/bin/python3 /root/ssr/server.py
