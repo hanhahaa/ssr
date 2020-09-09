@@ -143,6 +143,9 @@ address /dmm.com/$jpip
 address /disneynow.com/$usip
 address /disneyplus.com/$usip
 address /go.com/$usip
+#美国hulu
+address /hulu.com/$usip
+address /huluim.com/$usip
 ">/etc/smartdns.conf
 #重启服务
 systemctl restart smartdns
