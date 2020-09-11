@@ -58,21 +58,22 @@ fi
 timedatectl set-timezone Asia/Shanghai
 #赋予脚本可执行权限
 chmod  +x /root/ssr/*.sh
+#计划任务改成bash执行
+sed -i 's|SHELL=/bin/sh|SHELL=/bin/bash|' /etc/crontab
 #添加计划任务
-echo "
+echo '
 #每天05:55执行task
-55 5 * * * root bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/gougogoal/ssr/manyuser/task.sh')
+55 5 * * * root curl -k https://raw.githubusercontent.com/GouGoGoal/ssr/manyuser/task.sh |bash
+#每天05:55清理日志日志
+55 5 * * * root find /var/ -name "*.log.*" -exec rm -rf {} \;
 #每天06:00点重启
 0 6 * * * root init 6
-#每周一删除日志
-55 5 * * 1 root rm -rf /var/log/*log.* /var/log/*.gz
-">>/etc/crontab
+'>>/etc/crontab
 rm -rf setup.sh .git .gitignore README.md 
 mv besttrace /usr/sbin
 chmod +x /usr/sbin/besttrace
 mv tcping /usr/sbin
 chmod +x /usr/sbin/tcping
-
 
 if [ "$2" != "0" -a "$2" != ""  ];then
 #添加探针服务
@@ -91,7 +92,6 @@ systemctl enable state
 systemctl restart state
 echo "$2.lovegoogle.xyz已添加探针"
 fi
-
 
 if [ "$3" == "ovz" ];then
 echo "
@@ -144,6 +144,7 @@ net.ipv4.tcp_rmem = 4096 87380 67108864
 net.ipv4.tcp_wmem = 4096 65536 67108864
 ">/etc/sysctl.conf
 sysctl -p
+
 
 echo "针对kvm优化参数，已开启BBR，已修改启动时间"
 read -p "输入nodeID参数继续对接V2ray" v2_node
