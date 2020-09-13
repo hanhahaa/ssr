@@ -118,7 +118,7 @@ address /hdslb.com/$twip
 #日本AbemaTV
 address /ameba.jp/$jpip
 address /abema.io/$jpip
-address /news-abematv.akamaized.net/$jpip
+address /akamaized.net/$jpip
 #TVer
 address /tver.jp/$jpip
 address /amazonaws.com/$jpip
@@ -146,6 +146,17 @@ address /go.com/$usip
 #美国hulu
 address /hulu.com/$usip
 address /huluim.com/$usip
+#美国HBO
+address /hbo.com/$usip
+address /hbomax.com/$usip
+address /hbonow.com/$usip
+#美国espn+
+address /espn.com/$usip
+address /espn.net/$usip
+address /espncdn.com/$usip
+address /bamgrid.com/$usip
+#美国peaacock
+address /peacocktv.com/$usip
 ">/etc/smartdns.conf
 #重启服务
 systemctl restart smartdns
