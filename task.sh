@@ -20,7 +20,7 @@ fi
 
 #不将SSR端口暴露至公网
 echo '{
-    "server": "0.0.0.0",
+    "server": "127.0.0.1",
     "#server_ipv6": "::",
     "server_port": 8388,
     "local_address": "127.0.0.1",
