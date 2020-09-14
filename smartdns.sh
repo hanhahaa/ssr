@@ -5,6 +5,7 @@ twip=`ping -c1 -w1 unlock.tw.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 hkip=`ping -c1 -w1 unlock.hk.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'`
 jpip=`ping -c1 -w1 unlock.jp.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` 
 usip=`ping -c1 -w1 unlock.us.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` 
+#cnip=`ping -c1 -w1 unlock.cn.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` 
 #sgip=`ping -c1 -w1 unlock.sg.soulout.club|awk -F'[(|)]' 'NR==1{print $2}'` 
 
 #奈飞IP，就近解锁，美国鸡就写usip
@@ -17,6 +18,7 @@ if [ "$twip" = "" ]; then twip="-"; fi
 if [ "$hkip" = "" ]; then hkip="-"; fi
 if [ "$jpip" = "" ]; then jpip="-"; fi
 if [ "$usip" = "" ]; then usip="-"; fi
+if [ "$cnip" = "" ]; then cnip="-"; fi
 if [ "$sgip" = "" ]; then sgip="-"; fi
 if [ "$nfip" = "" ]; then nfip="-"; fi
 #释放内存
@@ -44,6 +46,7 @@ old_twip=$twip
 old_hkip=$hkip
 old_jpip=$jpip
 old_usip=$usip
+old_cnip=$cnip
 old_sgip=$sgip
 ">/tmp/smartdns_tmp
 }
@@ -157,6 +160,13 @@ address /espncdn.com/$usip
 address /bamgrid.com/$usip
 #美国peaacock
 address /peacocktv.com/$usip
+#中国腾讯视频
+address /v.qq.com/$cnip
+address /video.qq.com/$cnip
+#中国爱奇艺
+address /qiyi.comm/$cnip
+address /qy.net/$cnip
+address /iqiyipic.com/$cnip
 ">/etc/smartdns.conf
 #重启服务
 systemctl restart smartdns
@@ -169,7 +179,7 @@ if [ ! -f "/tmp/smartdns_tmp" ]; then
 else
 	.  /tmp/smartdns_tmp
 	#对比IP变化，有变化就刷新重启smartdns
-	if [ "$twip" == "$old_twip" -a "$hkip" == "$old_hkip" -a "$jpip" == "$old_jpip" -a "$usip" == "$old_usip" -a "$sgip" == "$old_sgip" ];then
+	if [ "$twip" == "$old_twip" -a "$hkip" == "$old_hkip" -a "$jpip" == "$old_jpip" -a "$usip" == "$old_usip" -a "$sgip" == "$old_sgip" -a "$cnip" == "$old_cnip" ];then
 		#检查内存剩余，可关闭
 		#freeram
 		echo "$(date +"%Y-%m-%d %T") IP无变动，退出脚本"
