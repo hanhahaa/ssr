@@ -21,36 +21,23 @@ if [ "$usip" = "" ]; then usip="-"; fi
 if [ "$cnip" = "" ]; then cnip="-"; fi
 if [ "$sgip" = "" ]; then sgip="-"; fi
 if [ "$nfip" = "" ]; then nfip="-"; fi
-#释放内存
+#释放内存，若需要开启，请将代码最下方的freeram函数注释掉
 freeram() {
-#获取总共内存
-totally_ram=`free -m | awk '/Mem/ {print $2}'`
-#获取当前使用的swap量
-used_swap=`free -m | awk '/Swap/ {print $3}'`
-#如果swap=0,则退出脚本，如果总内存/swap用量小于10，即swap超过物理内存的10%
-if [ "$used_swap" -eq 0 ]; then
+	#获取总共内存
+	totally_ram=`free -m | awk '/Mem/ {print $2}'`
+	#获取当前使用的swap量
+	used_swap=`free -m | awk '/Swap/ {print $3}'`
+	#如果swap=0,则退出脚本，如果总内存/swap用量小于10，即swap超过物理内存的10%
+	if [ "$used_swap" -eq 0 ]; then
 		exit 
-elif [ `expr $totally_ram / $used_swap` -lt 10 ]; then
+	elif [ `expr $totally_ram / $used_swap` -lt 10 ]; then
 		#内存释放执行的命令,重启docker之类的
 		systemctl restart ssr v2ray docker
 		swapoff -a && swapon -a
-		echo "$(date +"%Y-%m-%d %T") IP无变动，但当前RAM不足，已重启相关服务"
+		echo "IP无变动，但当前RAM不足，已重启相关服务"
 		exit
-fi
+	fi
 }
-
-#写入smartdns缓存
-touch_smartdns_tmp() {
-echo "
-old_twip=$twip
-old_hkip=$hkip
-old_jpip=$jpip
-old_usip=$usip
-old_cnip=$cnip
-old_sgip=$sgip
-">/tmp/smartdns_tmp
-}
-
 
 #定义刷新smartdns参数并重启的函数
 flush_smartdns_conf() {
@@ -91,7 +78,7 @@ log-level error
 #日志位置
 log-file /var/log/smartdns.log
 log-size 128k
-log-num 3
+log-num 1
 #ban掉部分域名
 conf-file /etc/ban.conf
 #奈飞
@@ -172,21 +159,16 @@ address /iqiyipic.com/$cnip
 systemctl restart smartdns
 }
 
-if [ ! -f "/tmp/smartdns_tmp" ]; then 
-	echo "$(date +"%Y-%m-%d %T") 无缓存，写入缓存并刷新配置"
-		touch_smartdns_tmp
-		flush_smartdns_conf
+if [ ! -f "/etc/smartdns.conf" ]; then 
+	echo "当前无配置文件，已生成"
+	flush_smartdns_conf
 else
-	.  /tmp/smartdns_tmp
 	#对比IP变化，有变化就刷新重启smartdns
-	if [ "$twip" == "$old_twip" -a "$hkip" == "$old_hkip" -a "$jpip" == "$old_jpip" -a "$usip" == "$old_usip" -a "$sgip" == "$old_sgip" -a "$cnip" == "$old_cnip" ];then
-		#检查内存剩余，可关闭
-		#freeram
-		echo "$(date +"%Y-%m-%d %T") IP无变动，退出脚本"
-	else 
-		echo "$(date +"%Y-%m-%d %T") IP有变动，刷新配置和缓存"
+	if [ "`grep $twip /etc/smartdns.conf`" == "" -o "`grep $hkip /etc/smartdns.conf`" == "" -o "`grep $jpip /etc/smartdns.conf`" == "" -o "`grep $usip /etc/smartdns.conf`" == "" -o "`grep $cnip /etc/smartdns.conf`" == "" -o "`grep $sgip /etc/smartdns.conf`" == "" ];then
+		echo "IP有变化，已重新生成配置文件"
 		flush_smartdns_conf
-		touch_smartdns_tmp
+	else 
+		echo "IP无变化，退出脚本"
 	fi     
 fi
 
@@ -194,6 +176,8 @@ fi
 #iptables劫持DNS
 if [ "`iptables -t nat -nL |grep DNAT|grep -w 127.0.0.1:53`" == "" ]; then
     iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53
+	#iptables -t nat -A OUTPUT -p udp --dport 53 ! -d 1.1.1.1 -j DNAT --to-destination 127.0.0.1:53
+	#需要放行指定DNS时如上设置，购买流媒体解锁时可以这么用
 fi
 
 
