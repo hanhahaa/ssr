@@ -173,12 +173,12 @@ else
 fi
 
 
-#iptables劫持DNS
-if [ "`iptables -t nat -nL |grep DNAT|grep -w 127.0.0.1:53`" == "" ]; then
-    iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53
-	#iptables -t nat -A OUTPUT -p udp --dport 53 ! -d 1.1.1.1 -j DNAT --to-destination 127.0.0.1:53
-	#需要放行指定DNS时如上设置，购买流媒体解锁时可以这么用
-fi
+#iptables劫持DNS，若规则经常意外丢失就取消此处注释
+#if [ "`iptables -t nat -nL |grep DNAT|grep -w 127.0.0.1:53`" == "" ]; then
+#	iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53
+#	#iptables -t nat -A OUTPUT -p udp --dport 53 ! -d 1.1.1.1 -j DNAT --to-destination 127.0.0.1:53
+#	#需要放行指定DNS时如上设置，购买流媒体解锁时可以这么用
+#fi
 
 
 #NAT小鸡解锁作服务端，请自行更改映射出来的80公网IP端口

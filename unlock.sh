@@ -12,7 +12,9 @@ Before=rc-local.service
 
 [Service]
 Type=simple
+ExecStartPre=`which iptables|tail -1` -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53
 ExecStart=/usr/sbin/smartdns -f -c /etc/smartdns.conf
+ExecStopPost=`which iptables|tail -1` -t nat -D OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.1:53
 Restart=always
 
 [Install]
