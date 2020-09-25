@@ -194,4 +194,5 @@ fi
 #		iptables -t nat -A OUTPUT -p tcp -d $hkip --dport 443 -j DNAT --to-destination $hkip:10443
 #fi
 
-
+#根据当前swap占用自动释放内存
+#freeram

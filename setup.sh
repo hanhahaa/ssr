@@ -87,7 +87,7 @@ ExecStart=/usr/bin/python3 /root/ssr/state.py
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target">/etc/systemd/system/state.service
-sed -i "10s/node/$2/" state.py
+sed -i "s/node/$2/" state.py
 systemctl enable state
 systemctl restart state
 echo "$2.lovegoogle.xyz已添加探针"
